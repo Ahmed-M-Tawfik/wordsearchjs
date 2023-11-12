@@ -1,7 +1,8 @@
 import {gameInit, gameState} from './gameState.js';
+import {generateWordSearchContent} from "./wordSearchGenerator.js";
 
 function init(gameConfig) {
-    gameInit(gameConfig);
+    gameInit(gameConfig, generateWordSearchContent(gameConfig.rows, gameConfig.columns, gameConfig.wordCount, gameConfig.sourceDictionary));
 
     drawGrid(document.getElementById("gameBoard"));
 }
