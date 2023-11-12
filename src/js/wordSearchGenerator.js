@@ -8,7 +8,7 @@ export function generateWordSearchContent(rows, columns, wordCount, sourceDictio
 
 function wordSearchFillAlgorithm(rows, columns, wordCount, sourceDictionary) {
     // generate word list from dictionary
-    let wordList= createWordList(Math.max(rows, columns), wordCount, sourceDictionary);
+    let wordList = createWordList(Math.max(rows, columns), wordCount, sourceDictionary);
     console.log("Word list: " + wordList);
 
     // add word list to the grid
@@ -39,80 +39,132 @@ function createWordList(maxWordSize, wordCount, sourceDictionary) {
 }
 
 function placeWordsInGrid(rows, columns, wordCount, wordList) {
-    let grid = Array(rows)
-        .fill()
-        .map(() => Array(columns).fill());
+    let wordSuccessfullyAdded = true;
+    let grid = null;
 
-    for (let i = 0; i < wordCount; i++) {
-        let wordToBeAdded = wordList[i];
+    let retryCount = -1; // breaker to avoid infinite loop in rare cases where no solution possible
+    do {
+        retryCount++;
 
-        let retries = -1;
-        let wordSuccessfullyAdded = false;
-        do {
-            let badPlacementDetected = false;
-            retries++;
-
-            // randomly pick alignment (horizontal, vertical, reverse h, reverse v)
-            let alignment = Math.floor(Math.random() * 2); // todo make 4
-
-            // try to place
-            if (alignment === 0) { // horizontal, left to right
-                // find the right starting point
-                let maxStartingColumn = columns - wordToBeAdded.length;
-                let startingColumn = Math.floor(Math.random() * maxStartingColumn);
-                let row = Math.floor(Math.random() * rows);
-
-                // check validity
-                for (let n = 0; n < wordToBeAdded.length; n++) {
-                    console.log("Check `" + grid[row][n + startingColumn] + "` for coords " + row + "/" + (n + startingColumn) + " for word " + wordToBeAdded);
-                    if (grid[row][n + startingColumn]) {
-                        badPlacementDetected = true;
-                        break;
-                    }
-                }
-                if (badPlacementDetected) {
-                    continue; // skip and retry placement
-                }
-
-                // place
-                for (let n = 0; n < wordToBeAdded.length; n++) {
-                    grid[row][n + startingColumn] = addGridBoxData(wordToBeAdded[n], i);
-                }
-                wordSuccessfullyAdded = true;
-            } else if (alignment === 1) { // vertical, top to bottom
-                // find the right starting point
-                let maxStartingRow = rows - wordToBeAdded.length;
-                let startingRow = Math.floor(Math.random() * maxStartingRow);
-                let column = Math.floor(Math.random() * columns);
-
-                // check validity
-                for (let n = 0; n < wordToBeAdded.length; n++) {
-                    console.log("Check `" + grid[n + startingRow][column] + "` for coords " + (n + startingRow) + "/" + column + " for word " + wordToBeAdded);
-                    if (grid[n + startingRow][column]) {
-                        badPlacementDetected = true;
-                        break;
-                    }
-                }
-                if (badPlacementDetected) {
-                    continue; // skip and retry placement
-                }
-
-                // place
-                for (let n = 0; n < wordToBeAdded.length; n++) {
-                    grid[n + startingRow][column] = addGridBoxData(wordToBeAdded[n], i);
-                }
-                wordSuccessfullyAdded = true;
-            }
-
-        } while (retries < WORD_PLACEMENT_MAX_RETRIES && !wordSuccessfullyAdded);
-        // if reached max retries scrap and restart fill from zero
-        if (!wordSuccessfullyAdded) {
-            // todo - add restart logic
-            alert("Reached max retries while trying to add `" + wordToBeAdded + "` to grid");
-        }
+        grid = createEmptyGrid(rows, columns);
+        wordSuccessfullyAdded = attemptWordsPlacement(rows, columns, wordCount, wordList, grid);
+    } while (!wordSuccessfullyAdded && retryCount < WORD_PLACEMENT_MAX_RETRIES);
+    if (!wordSuccessfullyAdded) {
+        console.error("Unable to find word placement solution");
     }
 
     return grid;
+}
+
+function createEmptyGrid(rows, columns) {
+    return Array(rows).fill()
+        .map(
+            () => Array(columns).fill()
+        );
+}
+
+function attemptWordsPlacement(rows, columns, wordCount, wordList, grid) {
+    let wordSuccessfullyAdded = true;
+    for (let i = 0; i < wordCount && wordSuccessfullyAdded; i++) {
+        let wordToBeAdded = wordList[i];
+        wordSuccessfullyAdded &= attemptWordPlacement(wordToBeAdded, i, rows, columns, grid);
+    }
+    return wordSuccessfullyAdded;
+}
+
+/**
+ * Attempts to add the given word to the grid, multiple times, as per the WORD_PLACEMENT_MAX_RETRIES constant. Returns false if unable after retries.
+ * @param word to be added to grid
+ * @param index of word in word list, used as marking of 'ownership' of each character of the word in the grid
+ * @param rows in the grid
+ * @param columns in the grid
+ * @param grid in which the word will be placed
+ * @returns successful placement of word
+ */
+function attemptWordPlacement(word, index, rows, columns, grid) {
+    let retries = -1;
+    let wordSuccessfullyAdded = false;
+
+    do {
+        retries++;
+
+        let placementLocationFunc = selectPlacementAlignment();
+        const alignmentSpecificFunctions = placementLocationFunc(word, rows, columns);
+
+        if (wordPlacementInGridIsValid(word, grid, alignmentSpecificFunctions.getGridElementAt)) {
+            continue; // skip and retry placement
+        }
+
+        placeWordInGrid(word, grid, index, alignmentSpecificFunctions.addDataAtLocationInGrid);
+        wordSuccessfullyAdded = true;
+
+    } while (retries < WORD_PLACEMENT_MAX_RETRIES && !wordSuccessfullyAdded);
+
+    return wordSuccessfullyAdded;
+}
+
+function selectPlacementAlignment() {
+    // randomly pick alignment (horizontal, vertical, reverse h, reverse v)
+    let alignment = Math.floor(Math.random() * 2); // todo make 4
+
+    // get relevant placement logic
+    let placementLocationFunc = getHorizontalPlacementLocation;
+    if (alignment === 0) { // horizontal, left to right
+        placementLocationFunc = getHorizontalPlacementLocation;
+    } else if (alignment === 1) { // vertical, top to bottom
+        placementLocationFunc = getVerticalPlacementLocation;
+    }
+
+    return placementLocationFunc;
+}
+
+function getVerticalPlacementLocation(wordToBeAdded, rows, columns) {
+    let maxStartingRow = rows - wordToBeAdded.length;
+    let startingRow = Math.floor(Math.random() * maxStartingRow);
+    let column = Math.floor(Math.random() * columns);
+
+    let getGridElementAt = function (grid, n) {
+        return grid[n + startingRow][column];
+    }
+    let addDataAtLocationInGrid = function (grid, n, data) {
+        grid[n + startingRow][column] = data;
+    }
+
+    return {getGridElementAt, addDataAtLocationInGrid};
+}
+
+function getHorizontalPlacementLocation(wordToBeAdded, columns, rows) {
+    // find the right starting point
+    let maxStartingColumn = columns - wordToBeAdded.length;
+    let startingColumn = Math.floor(Math.random() * maxStartingColumn);
+    let row = Math.floor(Math.random() * rows);
+
+    let getGridElementAt = function (grid, n) {
+        return grid[row][n + startingColumn];
+    }
+    let addDataAtLocationInGrid = function (grid, n, data) {
+        grid[row][n + startingColumn] = data;
+    }
+
+    return {getGridElementAt, addDataAtLocationInGrid};
+}
+
+function wordPlacementInGridIsValid(wordToBeAdded, grid, getGridElementAt) {
+    let badPlacementDetected = false;
+    for (let n = 0; n < wordToBeAdded.length; n++) {
+        //console.log("Check `" + grid[row][n + startingColumn] + "` for coords " + row + "/" + (n + startingColumn) + " for word " + wordToBeAdded);
+        if (getGridElementAt(grid, n)) {
+            badPlacementDetected = true;
+            break;
+        }
+    }
+    return badPlacementDetected;
+}
+
+function placeWordInGrid(wordToBeAdded, grid, wordIndex, addDataAtLocationInGrid) {
+    for (let n = 0; n < wordToBeAdded.length; n++) {
+        addDataAtLocationInGrid(grid, n, addGridBoxData(wordToBeAdded[n], wordIndex));
+    }
 }
 
 function placeRandomCharsInEmptyGridSpaces(rows, columns, grid) {

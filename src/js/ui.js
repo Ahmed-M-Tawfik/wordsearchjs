@@ -5,8 +5,8 @@ export function drawGrid(container, gridSize, gridContent) {
     const grid = document.createElement("div");
     grid.classList.add("grid", "prevent-text-highlighting");
 
-    for(let i = 0; i < rows; i++) {
-        for(let j = 0; j < columns; j++) {
+    for (let i = 0; i < rows; i++) {
+        for (let j = 0; j < columns; j++) {
             drawGridBox(grid, i, j, gridContent[i][j]);
         }
     }
@@ -17,7 +17,7 @@ export function drawGrid(container, gridSize, gridContent) {
 function drawGridBox(grid, row, col, gridBoxData) {
     const gridBox = document.createElement("div");
     gridBox.classList.add("gridBox");
-    if(gridBoxData.getWordIndex?.() !== null) {
+    if (gridBoxData.getWordIndex?.() !== null) {
         gridBox.classList.add("debug-added-word")
     }
     gridBox.textContent = gridBoxData.getContent();
