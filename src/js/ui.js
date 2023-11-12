@@ -17,7 +17,7 @@ export function drawGrid(container, gridSize, gridContent) {
 function drawGridBox(grid, row, col, gridBoxData) {
     const gridBox = document.createElement("div");
     gridBox.classList.add("gridBox");
-    if(gridBoxData.getWordIndex?.()) {
+    if(gridBoxData.getWordIndex?.() !== null) {
         gridBox.classList.add("debug-added-word")
     }
     gridBox.textContent = gridBoxData.getContent();
