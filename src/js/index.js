@@ -1,18 +1,31 @@
 function init() {
-    let horizontal = 8;
-    let vertical = 8;
+    drawGrid(document.getElementById("gameBoard"));
+}
 
-    let gridTable = document.getElementById("gameBoardTable");
-    for(let i = 0; i < vertical; i++) {
-        const row = document.createElement("tr");
-        for(let j = 0; j < horizontal; j++) {
-            const td = document.createElement("td");
-            td.textContent = generateRandomCharacter();
-            td.onclick = getSelectionToggleFunc(td);
-            row.appendChild(td);
+function drawGrid(container) {
+    let rows = 8;
+    let columns = 8;
+
+    const grid = document.createElement("div");
+    grid.classList.add("grid", "prevent-text-highlighting");
+
+    for(let i = 0; i < rows; i++) {
+        for(let j = 0; j < columns; j++) {
+            drawGridBox(grid, i, j, generateRandomCharacter());
         }
-        gridTable.appendChild(row);
     }
+
+    container.appendChild(grid);
+}
+
+function drawGridBox(grid, row, col, content) {
+    const gridBox = document.createElement("div");
+    gridBox.classList.add("gridBox");
+    gridBox.textContent = content;
+    gridBox.id = `gridBox${row}${col}`;
+    gridBox.onclick = getSelectionToggleFunc(gridBox);
+
+    grid.appendChild(gridBox);
 }
 
 function generateRandomCharacter() {
