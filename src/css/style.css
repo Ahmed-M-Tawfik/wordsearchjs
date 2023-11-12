@@ -10,6 +10,8 @@ body {
     --selected: #b59f3b;
     --found: #538d4e;
 
+    --highlight: #40c0b5;
+
     /* Game Config */
     --gameRows: 8;
     --gameColumns: 8;
@@ -70,4 +72,8 @@ h1 {
     -moz-user-select: none; /* Old versions of Firefox */
     -ms-user-select: none; /* Internet Explorer/Edge */
     user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+}
+
+.gridBox.debug-added-word {
+    background: var(--highlight);
 }

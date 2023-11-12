@@ -1,7 +1,7 @@
 import {gameInit, gameState} from './gameState.js';
 
 function init(gameConfig) {
-    gameInit(gameConfig)
+    gameInit(gameConfig);
 
     drawGrid(document.getElementById("gameBoard"));
 }
@@ -22,10 +22,13 @@ function drawGrid(container) {
     container.appendChild(grid);
 }
 
-function drawGridBox(grid, row, col, content) {
+function drawGridBox(grid, row, col, gridBoxData) {
     const gridBox = document.createElement("div");
     gridBox.classList.add("gridBox");
-    gridBox.textContent = content;
+    if(gridBoxData.getWordIndex?.()) {
+        gridBox.classList.add("debug-added-word")
+    }
+    gridBox.textContent = gridBoxData.getContent();
     gridBox.id = `gridBox${row}${col}`;
     gridBox.onclick = getSelectionToggleFunc(gridBox);
 
@@ -41,6 +44,7 @@ function getSelectionToggleFunc(node) {
 const gameConfig = {
     rows: 8,
     columns: 8,
+    wordCount: 6,
     sourceDictionary: ["apple", "banana", "carrot", "durian", "eggplant", "fig", "guava", "horseradish", /*"i",*/ "jackfruit", "kale", "lemon", /*"m", "n"*/]
 }
 
