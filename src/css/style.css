@@ -1,6 +1,18 @@
+html,
+body {
+    background: var(--default);
+    font-family: sans-serif;
+}
+
+:root {
+    --default: #121213;
+    --empty: #969696;
+    --selected: #b59f3b;
+    --found: #538d4e;
+}
+
 h1 {
-    font-family: cursive;
-    color: darkblue;
+    color: var(--empty);
     text-align: center;
 }
 
@@ -11,16 +23,19 @@ h1 {
 }
 
 #gameBoardTable td {
-    border: 2px solid black;
+    border: 2px solid var(--empty);
     width: 40px;
     height: 40px;
+
     text-align: center;
     font-size: 20px;
+    color: var(--empty);
+
     cursor: pointer;
 }
 
 #gameBoardTable td.selected {
-    background: chartreuse;
+    background: var(--selected);
 }
 
 /* Generic styles */
