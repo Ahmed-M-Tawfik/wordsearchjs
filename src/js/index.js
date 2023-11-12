@@ -1,17 +1,21 @@
-function init() {
+import {gameInit, gameState} from './gameState.js';
+
+function init(gameConfig) {
+    gameInit(gameConfig)
+
     drawGrid(document.getElementById("gameBoard"));
 }
 
 function drawGrid(container) {
-    let rows = 8;
-    let columns = 8;
+    let rows = gameState.gridSize.rows;
+    let columns = gameState.gridSize.columns;
 
     const grid = document.createElement("div");
     grid.classList.add("grid", "prevent-text-highlighting");
 
     for(let i = 0; i < rows; i++) {
         for(let j = 0; j < columns; j++) {
-            drawGridBox(grid, i, j, generateRandomCharacter());
+            drawGridBox(grid, i, j, gameState.grid[i][j]);
         }
     }
 
@@ -28,15 +32,16 @@ function drawGridBox(grid, row, col, content) {
     grid.appendChild(gridBox);
 }
 
-function generateRandomCharacter() {
-    let charCode = Math.round(65 + Math.random() * 25);
-    return String.fromCharCode(charCode);
-}
-
 function getSelectionToggleFunc(node) {
     return function () {
         node.classList.toggle("selected");
     }
 }
 
-init();
+const gameConfig = {
+    rows: 8,
+    columns: 8,
+    sourceDictionary: ["apple", "banana", "carrot", "durian", "eggplant", "fig", "guava", "horseradish", /*"i",*/ "jackfruit", "kale", "lemon", /*"m", "n"*/]
+}
+
+init(gameConfig);
