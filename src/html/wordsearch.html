@@ -1,0 +1,125 @@
+<!doctype html>
+<html>
+    <head>
+        <script>
+            window.onload = function () {
+                for (let node of document.querySelectorAll("td")) {
+
+                    node.onclick = function () {
+                        node.classList.toggle("selected");
+                    }
+
+                    if (node.textContent !== "") continue; // skip
+                    let charCode = Math.round(65 + Math.random() * 25);
+                    node.textContent = String.fromCharCode(charCode);
+                }
+            }
+        </script>
+        <style>
+            h1 {
+                font-family: cursive;
+                color: darkblue;
+                text-align: center;
+            }
+
+            table {
+                border-collapse: collapse;
+            }
+            td {
+                border: 1px solid black;
+                width: 20px;
+                height: 20px;
+                text-align: center;
+                cursor: pointer;
+            }
+            td.selected {
+                background: chartreuse;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Word Search</h1>
+        <table>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+    </body>
+</html>
