@@ -1,45 +1,11 @@
 import {gameInit, gameState} from './gameState.js';
 import {generateWordSearchContent} from "./wordSearchGenerator.js";
+import {drawGrid} from "./ui.js";
 
 function init(gameConfig) {
     gameInit(gameConfig, generateWordSearchContent(gameConfig.rows, gameConfig.columns, gameConfig.wordCount, gameConfig.sourceDictionary));
 
-    drawGrid(document.getElementById("gameBoard"));
-}
-
-function drawGrid(container) {
-    let rows = gameState.gridSize.rows;
-    let columns = gameState.gridSize.columns;
-
-    const grid = document.createElement("div");
-    grid.classList.add("grid", "prevent-text-highlighting");
-
-    for(let i = 0; i < rows; i++) {
-        for(let j = 0; j < columns; j++) {
-            drawGridBox(grid, i, j, gameState.grid[i][j]);
-        }
-    }
-
-    container.appendChild(grid);
-}
-
-function drawGridBox(grid, row, col, gridBoxData) {
-    const gridBox = document.createElement("div");
-    gridBox.classList.add("gridBox");
-    if(gridBoxData.getWordIndex?.()) {
-        gridBox.classList.add("debug-added-word")
-    }
-    gridBox.textContent = gridBoxData.getContent();
-    gridBox.id = `gridBox${row}${col}`;
-    gridBox.onclick = getSelectionToggleFunc(gridBox);
-
-    grid.appendChild(gridBox);
-}
-
-function getSelectionToggleFunc(node) {
-    return function () {
-        node.classList.toggle("selected");
-    }
+    drawGrid(document.getElementById("gameBoard"), gameState.gridSize, gameState.grid);
 }
 
 const gameConfig = {
