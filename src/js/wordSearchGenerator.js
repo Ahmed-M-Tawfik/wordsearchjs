@@ -1,4 +1,5 @@
-import {stringIsBlank} from "./utils.js";
+import {createWordList} from "./wordSearchGenerator/wordListCreator.js";
+import {GridItem} from "./wordSearchGenerator/GridItem.js";
 
 const WORD_PLACEMENT_MAX_RETRIES = 20;
 
@@ -23,21 +24,6 @@ function wordSearchFillAlgorithm(rows, columns, wordCount, sourceDictionary) {
     };
 }
 
-function createWordList(maxWordSize, wordCount, sourceDictionary) {
-    let wordList = Array(wordCount);
-
-    for (let i = 0; i < wordCount; i++) {
-        let pickedWord = null;
-        do {
-            let dictionaryIndex = Math.floor(Math.random() * sourceDictionary.length);
-            pickedWord = sourceDictionary[dictionaryIndex];
-        } while (stringIsBlank(pickedWord) || pickedWord.length > maxWordSize || wordList.includes(pickedWord));
-        wordList[i] = pickedWord;
-    }
-
-    return wordList;
-}
-
 function placeWordsInGrid(rows, columns, wordCount, wordList) {
     let wordSuccessfullyAdded = true;
     let grid = null;
@@ -57,9 +43,9 @@ function placeWordsInGrid(rows, columns, wordCount, wordList) {
 }
 
 function createEmptyGrid(rows, columns) {
-    return Array(rows).fill()
+    return Array(rows).fill('')
         .map(
-            () => Array(columns).fill()
+            () => Array(columns).fill('')
         );
 }
 
@@ -95,7 +81,7 @@ function attemptWordPlacement(word, index, rows, columns, grid) {
             continue; // skip and retry placement
         }
 
-        placeWordInGrid(word, grid, index, alignmentSpecificFunctions.addDataAtLocationInGrid);
+        placeWordInGrid(word, grid, index, alignmentSpecificFunctions.setGridElementAt);
         wordSuccessfullyAdded = true;
 
     } while (retries < WORD_PLACEMENT_MAX_RETRIES && !wordSuccessfullyAdded);
@@ -126,11 +112,11 @@ function getVerticalPlacementLocation(wordToBeAdded, rows, columns) {
     let getGridElementAt = function (grid, n) {
         return grid[n + startingRow][column];
     }
-    let addDataAtLocationInGrid = function (grid, n, data) {
+    let setGridElementAt = function (grid, n, data) {
         grid[n + startingRow][column] = data;
     }
 
-    return {getGridElementAt, addDataAtLocationInGrid};
+    return {getGridElementAt, setGridElementAt};
 }
 
 function getHorizontalPlacementLocation(wordToBeAdded, columns, rows) {
@@ -142,17 +128,16 @@ function getHorizontalPlacementLocation(wordToBeAdded, columns, rows) {
     let getGridElementAt = function (grid, n) {
         return grid[row][n + startingColumn];
     }
-    let addDataAtLocationInGrid = function (grid, n, data) {
+    let setGridElementAt = function (grid, n, data) {
         grid[row][n + startingColumn] = data;
     }
 
-    return {getGridElementAt, addDataAtLocationInGrid};
+    return {getGridElementAt, setGridElementAt};
 }
 
 function wordPlacementInGridIsValid(wordToBeAdded, grid, getGridElementAt) {
     let badPlacementDetected = false;
     for (let n = 0; n < wordToBeAdded.length; n++) {
-        //console.log("Check `" + grid[row][n + startingColumn] + "` for coords " + row + "/" + (n + startingColumn) + " for word " + wordToBeAdded);
         if (getGridElementAt(grid, n)) {
             badPlacementDetected = true;
             break;
@@ -161,9 +146,9 @@ function wordPlacementInGridIsValid(wordToBeAdded, grid, getGridElementAt) {
     return badPlacementDetected;
 }
 
-function placeWordInGrid(wordToBeAdded, grid, wordIndex, addDataAtLocationInGrid) {
+function placeWordInGrid(wordToBeAdded, grid, wordIndex, setGridElementAt) {
     for (let n = 0; n < wordToBeAdded.length; n++) {
-        addDataAtLocationInGrid(grid, n, addGridBoxData(wordToBeAdded[n], wordIndex));
+        setGridElementAt(grid, n, new GridItem(wordToBeAdded[n], wordIndex));
     }
 }
 
@@ -171,7 +156,7 @@ function placeRandomCharsInEmptyGridSpaces(rows, columns, grid) {
     for (let i = 0; i < rows; i++) {
         for (let j = 0; j < columns; j++) {
             if (!grid[i][j]) {
-                grid[i][j] = addGridBoxData(generateRandomCharacter());
+                grid[i][j] = new GridItem(generateRandomCharacter());
             }
         }
     }
@@ -180,17 +165,4 @@ function placeRandomCharsInEmptyGridSpaces(rows, columns, grid) {
 function generateRandomCharacter() {
     let charCode = Math.round(65 + Math.random() * 25);
     return String.fromCharCode(charCode);
-}
-
-function addGridBoxData(content, index = null) {
-    return {
-        "content": content,
-        "wordIndex": index,
-        "getContent": function () {
-            return content;
-        },
-        "getWordIndex": function () {
-            return index;
-        }
-    }
 }

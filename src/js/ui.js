@@ -14,13 +14,13 @@ export function drawGrid(container, gridSize, gridContent) {
     container.appendChild(grid);
 }
 
-function drawGridBox(grid, row, col, gridBoxData) {
+function drawGridBox(grid, row, col, gridItem) {
     const gridBox = document.createElement("div");
     gridBox.classList.add("gridBox");
-    if (gridBoxData.getWordIndex?.() !== null) {
+    if (gridItem.index !== null) {
         gridBox.classList.add("debug-added-word")
     }
-    gridBox.textContent = gridBoxData.getContent();
+    gridBox.textContent = gridItem.content;
     gridBox.id = `gridBox${row}${col}`;
     gridBox.onclick = getSelectionToggleFunc(gridBox);
 
