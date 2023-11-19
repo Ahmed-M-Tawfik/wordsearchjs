@@ -1,5 +1,5 @@
 import {gameInit, gameState} from './gameState.js';
-import {generateWordSearchContent} from "./wordSearchGenerator.js";
+import {generateWordSearchContent} from "./wordSearchGenerator/Main.js";
 import {drawGrid} from "./ui.js";
 
 function init(gameConfig) {
