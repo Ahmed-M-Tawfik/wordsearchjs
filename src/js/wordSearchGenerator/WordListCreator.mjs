@@ -1,4 +1,4 @@
-import {stringIsBlank} from "../utils.js";
+import {stringIsBlank} from "../utils.mjs";
 
 export function createWordList(maxWordSize, wordCount, sourceDictionary) {
     let wordList = Array(wordCount);

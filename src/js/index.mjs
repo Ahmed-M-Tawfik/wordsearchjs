@@ -1,6 +1,6 @@
-import {gameInit, gameState} from './gameState.js';
-import {generateWordSearchContent} from "./wordSearchGenerator/Main.js";
-import {drawGrid} from "./ui.js";
+import {gameInit, gameState} from './gameState.mjs';
+import {generateWordSearchContent} from "./wordSearchGenerator/Main.mjs";
+import {drawGrid} from "./ui.mjs";
 
 function init(gameConfig) {
     gameInit(gameConfig, generateWordSearchContent(gameConfig.rows, gameConfig.columns, gameConfig.wordCount, gameConfig.sourceDictionary));

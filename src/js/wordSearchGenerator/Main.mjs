@@ -1,6 +1,6 @@
-import {createWordList} from "./WordListCreator.js";
-import {placeRandomCharsInEmptyGridSpaces, } from "./GridItemPlacer.js";
-import {placeWordsInGrid} from "./WordPlacer.js";
+import {createWordList} from "./WordListCreator.mjs";
+import {placeRandomCharsInEmptyGridSpaces, } from "./GridItemPlacer.mjs";
+import {placeWordsInGrid} from "./WordPlacer.mjs";
 
 export function generateWordSearchContent(rows, columns, wordCount, sourceDictionary) {
     return wordSearchFillAlgorithm(rows, columns, wordCount, sourceDictionary);

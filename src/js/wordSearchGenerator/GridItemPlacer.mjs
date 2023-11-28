@@ -1,5 +1,5 @@
-import {GridItem} from "./GridItem.js";
-import {generateRandomCharacter} from "./CharacterGenerator.js";
+import {GridItem} from "./GridItem.mjs";
+import {generateRandomCharacter} from "./CharacterGenerator.mjs";
 
 export function placeRandomCharsInEmptyGridSpaces(rows, columns, grid) {
     for (let i = 0; i < rows; i++) {
