@@ -1,6 +1,7 @@
 import {createEmptyGrid} from "./GridCreator.mjs";
 import {selectPlacementAlignment} from "./WordPlacementAlignment.mjs";
 import {GridItem} from "./GridItem.mjs";
+import * as WordPlacer from "./WordPlacer.mjs";
 
 const WORD_PLACEMENT_MAX_RETRIES = 20;
 
@@ -13,20 +14,21 @@ export function placeWordsInGrid(rows, columns, wordCount, wordList) {
         retryCount++;
 
         grid = createEmptyGrid(rows, columns);
-        wordSuccessfullyAdded = attemptWordsPlacement(rows, columns, wordCount, wordList, grid);
+        wordSuccessfullyAdded = WordPlacer.attemptWordsPlacement(rows, columns, wordCount, wordList, grid);
     } while (!wordSuccessfullyAdded && retryCount < WORD_PLACEMENT_MAX_RETRIES);
+
     if (!wordSuccessfullyAdded) {
-        console.error("Unable to find word placement solution");
+        throw new Error("Unable to find word placement solution for word list: " + wordList);
     }
 
     return grid;
 }
 
-function attemptWordsPlacement(rows, columns, wordCount, wordList, grid) {
+export function attemptWordsPlacement(rows, columns, wordCount, wordList, grid) {
     let wordSuccessfullyAdded = true;
     for (let i = 0; i < wordCount && wordSuccessfullyAdded; i++) {
         let wordToBeAdded = wordList[i];
-        wordSuccessfullyAdded &= attemptWordPlacement(wordToBeAdded, i, rows, columns, grid);
+        wordSuccessfullyAdded &= WordPlacer.attemptWordPlacement(wordToBeAdded, i, rows, columns, grid);
     }
     return wordSuccessfullyAdded;
 }
@@ -40,7 +42,7 @@ function attemptWordsPlacement(rows, columns, wordCount, wordList, grid) {
  * @param grid in which the word will be placed
  * @returns successful placement of word
  */
-function attemptWordPlacement(word, index, rows, columns, grid) {
+export function attemptWordPlacement(word, index, rows, columns, grid) {
     let retries = -1;
     let wordSuccessfullyAdded = false;
 
@@ -50,11 +52,11 @@ function attemptWordPlacement(word, index, rows, columns, grid) {
         let placementLocationFunc = selectPlacementAlignment();
         const alignmentSpecificFunctions = placementLocationFunc(word, rows, columns);
 
-        if (invalidWordPlacementInGrid(word, grid, alignmentSpecificFunctions.getGridElementAt)) {
+        if (WordPlacer.invalidWordPlacementInGrid(word, grid, alignmentSpecificFunctions.getGridElementAt)) {
             continue; // skip and retry placement
         }
 
-        placeWordInGrid(word, grid, index, alignmentSpecificFunctions.setGridElementAt);
+        WordPlacer.placeWordInGrid(word, grid, index, alignmentSpecificFunctions.setGridElementAt);
         wordSuccessfullyAdded = true;
 
     } while (retries < WORD_PLACEMENT_MAX_RETRIES && !wordSuccessfullyAdded);
@@ -62,13 +64,13 @@ function attemptWordPlacement(word, index, rows, columns, grid) {
     return wordSuccessfullyAdded;
 }
 
-function placeWordInGrid(wordToBeAdded, grid, wordIndex, setGridElementAt) {
+export function placeWordInGrid(wordToBeAdded, grid, wordIndex, setGridElementAt) {
     for (let n = 0; n < wordToBeAdded.length; n++) {
         setGridElementAt(grid, n, new GridItem(wordToBeAdded[n], wordIndex));
     }
 }
 
-function invalidWordPlacementInGrid(wordToBeAdded, grid, getGridElementAt) {
+export function invalidWordPlacementInGrid(wordToBeAdded, grid, getGridElementAt) {
     let badPlacementDetected = false;
     for (let n = 0; n < wordToBeAdded.length; n++) {
         if (getGridElementAt(grid, n)) {

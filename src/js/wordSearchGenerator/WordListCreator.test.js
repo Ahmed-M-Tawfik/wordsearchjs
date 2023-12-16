@@ -1,7 +1,7 @@
-import {describe, afterEach, it, vi, expect} from "vitest";
+import {describe, beforeEach, it, vi, expect} from "vitest";
 import * as WordListCreator from "./WordListCreator.mjs";
 
-afterEach(() => {
+beforeEach(() => {
     vi.restoreAllMocks();
 })
 

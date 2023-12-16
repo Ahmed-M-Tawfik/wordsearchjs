@@ -40,7 +40,6 @@ export function createWordList(maxWordSize, wordCount, sourceDictionary) {
 
             pickedWord = WordListCreator.pickWord(sourceDictionary);
             canUse = WordListCreator.validateWordForUse(pickedWord, maxWordSize, wordList);
-            console.log("Picked word: " + pickedWord + " canUse: " + canUse);
         } while (!canUse);
         wordList[i] = pickedWord;
     }
