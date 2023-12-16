@@ -4,16 +4,17 @@
   "description": "Word Search in JS",
   "main": "index.js",
   "scripts": {
-    "test": "NODE_OPTIONS=--experimental-vm-modules jest"
+    "test": "vitest",
+    "test:watch": "vitest"
   },
   "type": "module",
   "keywords": [],
   "author": "Ahmed Tawfik",
   "license": "ISC",
-  "devDependencies": {
-    "jest": "^29.7.0"
-  },
   "dependencies": {
-    "@jest/globals": "^29.7.0"
+
+  },
+  "devDependencies": {
+    "vitest": "^0.9.3"
   }
 }

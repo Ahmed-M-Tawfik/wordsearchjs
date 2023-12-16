@@ -15,7 +15,7 @@ function wordSearchFillAlgorithm(rows, columns, wordCount, sourceDictionary) {
     let grid = placeWordsInGrid(rows, columns, wordCount, wordList);
 
     // fill remaining grid boxes with random characters
-    placeRandomCharsInEmptyGridSpaces(rows, columns, grid);
+    placeRandomCharsInEmptyGridSpaces(grid);
 
     return {
         "grid": grid,
