@@ -3,7 +3,7 @@ export function drawGrid(container, gridSize, gridContent) {
     let columns = gridSize.columns;
 
     const grid = document.createElement("div");
-    grid.classList.add("grid", "prevent-text-highlighting");
+    grid.classList.add("grid", "no-select");
 
     for (let i = 0; i < rows; i++) {
         for (let j = 0; j < columns; j++) {

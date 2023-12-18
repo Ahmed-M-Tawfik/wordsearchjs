@@ -12,13 +12,17 @@ body {
 
     --highlight: #40c0b5;
 
+    --menu-text-color: black;
+    --menu-text-color-coloured-bg: white;
+    --menu-text-color-dark-bg: #969696;
+
     /* Game Config */
     --gameRows: 8;
     --gameColumns: 8;
 }
 
 h1 {
-    color: var(--empty);
+    color: var(--menu-text-color-dark-bg);
     text-align: center;
 }
 
@@ -65,7 +69,7 @@ h1 {
 
 /* Generic styles */
 /* Noselect: https://stackoverflow.com/questions/826782/how-to-disable-text-selection-highlighting */
-.prevent-text-highlighting {
+.no-select {
     -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
     -khtml-user-select: none; /* Konqueror HTML */
@@ -76,4 +80,28 @@ h1 {
 
 .gridBox.debug-added-word {
     background: var(--highlight);
+}
+
+#menuContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+#menuContainer button {
+    margin-bottom: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: var(--found);
+    color: var(--menu-text-color-coloured-bg);
+}
+
+#menuContainer button:hover {
+    background-color: var(--highlight);
 }
