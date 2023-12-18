@@ -1,4 +1,4 @@
-import {startDefaultGame} from "../main.js";
+import {startDefaultGame} from "../controller/controller.js";
 
 let gameContainer = null;
 

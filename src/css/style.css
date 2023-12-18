@@ -4,23 +4,6 @@ body {
     font-family: sans-serif;
 }
 
-:root {
-    --default: #121213;
-    --empty: #969696;
-    --selected: #b59f3b;
-    --found: #538d4e;
-
-    --highlight: #40c0b5;
-
-    --menu-text-color: black;
-    --menu-text-color-coloured-bg: white;
-    --menu-text-color-dark-bg: #969696;
-
-    /* Game Config */
-    --gameRows: 8;
-    --gameColumns: 8;
-}
-
 h1 {
     color: var(--menu-text-color-dark-bg);
     text-align: center;
@@ -80,28 +63,4 @@ h1 {
 
 .gridBox.debug-added-word {
     background: var(--highlight);
-}
-
-#menuContainer {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    padding: 20px;
-    border-radius: 8px;
-}
-
-#menuContainer button {
-    margin-bottom: 10px;
-    padding: 10px 20px;
-    font-size: 16px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    background-color: var(--found);
-    color: var(--menu-text-color-coloured-bg);
-}
-
-#menuContainer button:hover {
-    background-color: var(--highlight);
 }

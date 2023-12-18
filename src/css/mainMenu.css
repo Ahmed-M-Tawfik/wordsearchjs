@@ -1,0 +1,23 @@
+#menuContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+#menuContainer button {
+    margin-bottom: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: var(--found);
+    color: var(--menu-text-color-coloured-bg);
+}
+
+#menuContainer button:hover {
+    background-color: var(--highlight);
+}

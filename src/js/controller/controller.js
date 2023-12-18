@@ -1,6 +1,6 @@
-import {gameInit, gameState} from "./gameState.mjs";
-import {generateWordSearchContent} from "./wordSearchGenerator/Main.mjs";
-import {drawGrid} from "./ui.mjs";
+import {gameInit, gameState} from "../gameState.mjs";
+import {generateWordSearchContent} from "../wordSearchGenerator/Main.mjs";
+import {drawGrid} from "../ui/wordSearchGame.mjs";
 
 export function startDefaultGame(container) {
     const gameConfig = {

@@ -1,0 +1,16 @@
+:root {
+    --default: #121213;
+    --empty: #969696;
+    --selected: #b59f3b;
+    --found: #538d4e;
+
+    --highlight: #40c0b5;
+
+    --menu-text-color: black;
+    --menu-text-color-coloured-bg: white;
+    --menu-text-color-dark-bg: #969696;
+
+    /* Game Config */
+    --gameRows: 8;
+    --gameColumns: 8;
+}
