@@ -1,11 +1,11 @@
 html,
 body {
-    background: var(--default);
+    background: var(--ws-standard-bg);
     font-family: sans-serif;
 }
 
 h1 {
-    color: var(--menu-text-color-dark-bg);
+    color: var(--menu-standard-txt);
     text-align: center;
 }
 

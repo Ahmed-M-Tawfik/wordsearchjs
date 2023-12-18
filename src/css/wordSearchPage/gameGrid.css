@@ -6,7 +6,7 @@
     width: 100%;
     height: 72vh;
 
-    color: var(--empty);
+    color: var(--ws-grid-border);
 }
 
 .grid {
@@ -19,28 +19,28 @@
     display: grid;
     place-items: center;
 
-    border: 2px solid var(--empty);
+    border: 2px solid var(--ws-grid-border);
     width: 40px;
     height: 40px;
 
     text-align: center;
     font-size: 1.8rem;
-    color: var(--empty);
+    color: var(--ws-standard-txt);
     text-transform: uppercase;
 
     cursor: pointer;
 }
 
 .gridBox.selected {
-    background: var(--selected);
-    color: var(--default);
+    background: var(--ws-selected-bg);
+    color: var(--ws-dark-txt);
 }
 
 .gridBox.found {
-    background: var(--found);
-    color: var(--default);
+    background: var(--ws-found-bg);
+    color: var(--ws-dark-txt);
 }
 
 .gridBox.debug-highlight {
-    background: var(--highlight);
+    background: var(--ws-debug-highlight-bg);
 }

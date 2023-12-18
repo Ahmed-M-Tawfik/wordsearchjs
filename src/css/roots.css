@@ -1,14 +1,33 @@
 :root {
-    --default: #121213;
-    --empty: #969696;
-    --selected: #b59f3b;
-    --found: #538d4e;
+    /* Word search grid cell backgrounds */
+    --ws-standard-bg: #121213; /* All cells when not affected by any effects (e.g. found, highlighted, selected) */
+    --ws-selected-bg: #b59f3b; /* Selected cells when attempting to find word */
+    --ws-found-bg: #355b32; /* Word's cells when word is found */
 
-    --highlight: #40c0b5;
+    --ws-debug-highlight-bg: #40c0b5; /* Word's cells when debug word highlighting is active */
 
-    --menu-text-color: black;
-    --menu-text-color-coloured-bg: white;
-    --menu-text-color-dark-bg: #969696;
+    /* Word search grid cell text */
+    --ws-standard-txt: #b6b6b6; /* Word's cell text when unaffected */
+    --ws-dark-txt: #121213; /* Word's cell text when found or selected */
+
+    /* Word search grid */
+    --ws-grid-border: #b6b6b6;
+
+    /* Word list */
+    --wl-standard-bg: #355b32;
+    --wl-found-bg: #497e45;
+
+    --wl-standard-txt: #b6b6b6;
+
+    --wl-border: #355b32;
+
+    /* Menu buttons backgrounds */
+    --menu-active-bg: #355b32;
+    --menu-highlight-bg: #497e45;
+
+    /* Menu buttons text */
+    --menu-standard-txt: #b6b6b6;
+    --menu-highlight-txt: #FFFFFF;
 
     /* Game Config */
     --gameRows: 8;

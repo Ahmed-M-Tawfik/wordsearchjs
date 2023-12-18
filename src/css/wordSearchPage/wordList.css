@@ -8,7 +8,7 @@
 
 .word-list-container ol {
     border-style: solid;
-    border-color: var(--found);
+    border-color: var(--wl-border);
     border-radius: 8px;
 }
 
@@ -19,15 +19,14 @@
     font-size: 16px;
     border: none;
     border-radius: 5px;
-    background-color: var(--default);
-    color: var(--menu-text-color-dark-bg);
+    background-color: var(--wl-standard-bg);
+    color: var(--wl-standard-txt);
 }
 
 .word-list-container li:first-child {
     margin-top: 5px;
 }
 
-.word-list-item-found {
-    background-color: var(--found);
-    color: var(--menu-text-color-coloured-bg);
+.word-list-container li.word-list-item-found {
+    background-color: var(--wl-found-bg);
 }

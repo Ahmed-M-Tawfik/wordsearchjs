@@ -14,10 +14,11 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    background-color: var(--found);
-    color: var(--menu-text-color-coloured-bg);
+    background-color: var(--menu-active-bg);
+    color: var(--menu-standard-txt);
 }
 
 #menuContainer button:hover {
-    background-color: var(--highlight);
+    background-color: var(--menu-highlight-bg);
+    color: var(--menu-highlight-txt);
 }
