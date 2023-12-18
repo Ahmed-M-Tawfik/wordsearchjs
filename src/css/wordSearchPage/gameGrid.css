@@ -44,38 +44,3 @@
 .gridBox.debug-highlight {
     background: var(--highlight);
 }
-
-.word-list-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    padding: 20px;
-}
-
-.word-list-container ol {
-    border-style: solid;
-    border-color: var(--found);
-    border-radius: 8px;
-}
-
-.word-list-container li {
-    margin-bottom: 5px;
-    margin-right: 5px;
-    padding: 5px 20px;
-    font-size: 16px;
-    border: none;
-    border-radius: 5px;
-    background-color: var(--default);
-    color: var(--menu-text-color-dark-bg);
-    #background-color: var(--found);
-    #color: var(--menu-text-color-coloured-bg);
-}
-
-.word-list-container li:first-child {
-    margin-top: 5px;
-}
-
-.word-list-item-found {
-    background-color: var(--found);
-}
