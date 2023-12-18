@@ -8,6 +8,6 @@ export function gameInit(gameConfig, gameContent) {
         },
         grid: gameContent.grid,
         currentSelection: Array,
-        existingWords: gameContent.wordList
+        wordList: gameContent.wordList
     };
 }

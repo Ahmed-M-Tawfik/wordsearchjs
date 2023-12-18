@@ -1,6 +1,6 @@
 import {gameInit, gameState} from "../gameState.mjs";
 import {generateWordSearchContent} from "../wordSearchGenerator/Main.mjs";
-import {drawGrid} from "../ui/wordSearchGame.mjs";
+import {drawWordSearchPage} from "../ui/wordSearchGamePage.mjs";
 
 export function startDefaultGame(container) {
     const gameConfig = {
@@ -12,5 +12,5 @@ export function startDefaultGame(container) {
 
     gameInit(gameConfig, generateWordSearchContent(gameConfig.rows, gameConfig.columns, gameConfig.wordCount, gameConfig.sourceDictionary));
 
-    drawGrid(container, gameState.gridSize, gameState.grid);
+    drawWordSearchPage(container, gameState.gridSize, gameState.grid, gameState.wordList);
 }
