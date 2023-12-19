@@ -1,3 +1,5 @@
+import {attachEventListeners} from "./wordSearchGridInteraction.js";
+
 const debugWordGridItem = "debug-word-grid-item";
 
 export function drawWordSearchPage(container, gridSize, gridContent, wordList) {
@@ -29,6 +31,7 @@ function drawGrid(container, gridSize, gridContent) {
 
     const grid = document.createElement("div");
     grid.classList.add("grid", "no-select");
+    attachEventListeners(grid);
 
     for (let i = 0; i < rows; i++) {
         for (let j = 0; j < columns; j++) {
