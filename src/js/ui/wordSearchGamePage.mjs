@@ -49,7 +49,7 @@ function drawGridBox(grid, row, col, gridItem) {
         gridBox.classList.add(debugWordGridItem)
     }
     gridBox.textContent = gridItem.content;
-    gridBox.id = `gridBox${row}${col}`;
+    gridBox.id = `gridBox-${row}.${col}`;
     gridBox.onclick = getSelectionToggleFunc(gridBox);
 
     grid.appendChild(gridBox);

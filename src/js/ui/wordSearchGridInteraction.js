@@ -1,5 +1,6 @@
-let isDragging = false;
+import {selectedWordSearchGrid} from "../controller/controller.js";
 
+let isDragging = false;
 let selectedBoxes = new Set();
 
 function handleMouseDown(event) {
@@ -30,6 +31,11 @@ function handleMouseUp(event) {
     selectedBoxes.add(event.target);
 
     console.log("Finished dragging. Selected boxes: " + Array.from(selectedBoxes).map(box => box.id).join(', '));
+
+    selectedWordSearchGrid(Array.from(selectedBoxes).map((gridBox) => {
+        const coordStr = gridBox.id.split("-")[1];
+        return coordStr.split(".");
+    }));
 }
 
 export function attachEventListeners(gridContainer) {
