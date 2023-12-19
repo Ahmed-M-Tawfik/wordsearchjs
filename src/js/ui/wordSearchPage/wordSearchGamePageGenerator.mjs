@@ -1,5 +1,7 @@
 import {attachEventListeners} from "./wordSearchGridInteraction.js";
 
+export const wordListItemIdPrefix = "wordListItem-";
+
 const debugWordGridItem = "debug-word-grid-item";
 
 export function drawWordSearchPage(container, gridSize, gridContent, wordList) {
@@ -7,6 +9,8 @@ export function drawWordSearchPage(container, gridSize, gridContent, wordList) {
     drawGrid(container, gridSize, gridContent);
     drawDebugButton(container);
 }
+
+
 
 function drawWordList(container, wordList) {
     const wordListContainer = document.createElement("div");
@@ -19,6 +23,7 @@ function drawWordList(container, wordList) {
     for(const word of wordList) {
         const li = document.createElement('li');
         li.innerText = word;
+        li.id = wordListItemIdPrefix + word;
         htmlWordList.appendChild(li);
     }
 
@@ -50,15 +55,8 @@ function drawGridBox(grid, row, col, gridItem) {
     }
     gridBox.textContent = gridItem.content;
     gridBox.id = `gridBox-${row}.${col}`;
-    gridBox.onclick = getSelectionToggleFunc(gridBox);
 
     grid.appendChild(gridBox);
-}
-
-function getSelectionToggleFunc(node) {
-    return function () {
-        node.classList.toggle("selected");
-    }
 }
 
 function drawDebugButton(container) {

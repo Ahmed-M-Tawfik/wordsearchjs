@@ -1,6 +1,6 @@
 import {gameInit, gameState} from "../gameState.mjs";
 import {generateWordSearchContent} from "../wordSearchGenerator/Main.mjs";
-import {drawWordSearchPage} from "../ui/wordSearchGamePage.mjs";
+import {drawWordSearchPage} from "../ui/wordSearchPage/wordSearchGamePageGenerator.mjs";
 
 export function startDefaultGame(container) {
     const gameConfig = {
@@ -15,9 +15,9 @@ export function startDefaultGame(container) {
     drawWordSearchPage(container, gameState.gridSize, gameState.grid, gameState.wordList);
 }
 
-export function selectedWordSearchGrid(coords) {
+export function isWordSelectedInGrid(coords) {
     if (coords.length === 0)
-        return;
+        return false;
 
     const gridItems = coords.map((coord) => {
         return gameState.grid[coord[0]][coord[1]];
@@ -40,10 +40,11 @@ export function selectedWordSearchGrid(coords) {
         gridItems[0].index
     );
 
-    if (!selectedWordIndex || gameState.wordList[selectedWordIndex].length !== coords.length) {
+    if (selectedWordIndex == null || gameState.wordList[selectedWordIndex].length !== coords.length) {
         console.log("Failed to match word " + selectedWordIndex + " " + coords.length);
-        return;
+        return false;
     }
 
     console.log("Word matched " + gameState.wordList[selectedWordIndex]);
+    return gameState.wordList[selectedWordIndex];
 }
