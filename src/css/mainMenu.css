@@ -1,4 +1,4 @@
-#menuContainer {
+.menuContainer {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -7,7 +7,7 @@
     border-radius: 8px;
 }
 
-#menuContainer button {
+.menuContainer button {
     margin-bottom: 10px;
     padding: 10px 20px;
     font-size: 16px;
@@ -18,7 +18,7 @@
     color: var(--menu-standard-txt);
 }
 
-#menuContainer button:hover {
+.menuContainer button:hover {
     background-color: var(--menu-highlight-bg);
     color: var(--menu-highlight-txt);
 }

@@ -1,7 +1,7 @@
-import {drawMainMenu} from "./ui/mainMenuPage.js";
+import {loadMainMenu} from "./controller/controller.js";
 
 function init() {
-    drawMainMenu(document.getElementById("gameBoard"));
+    loadMainMenu();
 }
 
 init();

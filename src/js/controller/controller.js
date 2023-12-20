@@ -1,8 +1,14 @@
 import {gameInit, gameState} from "../gameState.mjs";
 import {generateWordSearchContent} from "../wordSearchGenerator/Main.mjs";
 import {drawWordSearchPage} from "../ui/wordSearchPage/wordSearchGamePageGenerator.mjs";
+import {drawMainMenu} from "../ui/mainMenuPage.js";
+import {clearPage} from "../ui/general.js";
 
-export function startDefaultGame(container) {
+export function startDefaultGame() {
+    const gameBoard = document.getElementById("gameBoard");
+
+    clearPage(gameBoard);
+
     const gameConfig = {
         rows: 8,
         columns: 8,
@@ -12,7 +18,13 @@ export function startDefaultGame(container) {
 
     gameInit(gameConfig, generateWordSearchContent(gameConfig.rows, gameConfig.columns, gameConfig.wordCount, gameConfig.sourceDictionary));
 
-    drawWordSearchPage(container, gameState.gridSize, gameState.grid, gameState.wordList);
+    drawWordSearchPage(gameBoard, gameState.gridSize, gameState.grid, gameState.wordList);
+}
+
+export function loadMainMenu() {
+    const gameBoard = document.getElementById("gameBoard");
+    clearPage(gameBoard);
+    drawMainMenu(gameBoard);
 }
 
 export function isWordSelectedInGrid(coords) {

@@ -7,12 +7,11 @@ export function drawMainMenu(container) {
 
     const menuContainer = document.createElement("div");
     menuContainer.id = "menuContainer";
-    menuContainer.classList.add("no-select");
-    // menuContainer.classList.add("menu", "no-select");
+    menuContainer.classList.add("no-select", "menuContainer");
 
     const startDefaultGameButton = document.createElement("button");
     startDefaultGameButton.textContent = "Start default game";
-    startDefaultGameButton.addEventListener('click', startGameDefaultSettings)
+    startDefaultGameButton.addEventListener('click', startGameDefaultSettingsBtn)
     menuContainer.appendChild(startDefaultGameButton);
 
     const customConfigGameButton = document.createElement("button");
@@ -23,11 +22,6 @@ export function drawMainMenu(container) {
     container.appendChild(menuContainer);
 }
 
-function clearMainMenu(container) {
-    container.replaceChildren();
-}
-
-function startGameDefaultSettings() {
-    clearMainMenu(gameContainer);
-    startDefaultGame(gameContainer);
+function startGameDefaultSettingsBtn() {
+    startDefaultGame();
 }

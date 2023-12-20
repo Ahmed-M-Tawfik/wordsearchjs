@@ -1,4 +1,5 @@
 import {attachEventListeners} from "./wordSearchGridInteraction.js";
+import {loadMainMenu} from "../../controller/controller.js";
 
 export const wordListItemIdPrefix = "wordListItem-";
 
@@ -7,10 +8,8 @@ const debugWordGridItem = "debug-word-grid-item";
 export function drawWordSearchPage(container, gridSize, gridContent, wordList) {
     drawWordList(container, wordList);
     drawGrid(container, gridSize, gridContent);
-    drawDebugButton(container);
+    drawSidebarList(container);
 }
-
-
 
 function drawWordList(container, wordList) {
     const wordListContainer = document.createElement("div");
@@ -59,21 +58,31 @@ function drawGridBox(grid, row, col, gridItem) {
     grid.appendChild(gridBox);
 }
 
-function drawDebugButton(container) {
-    const buttonContainer = document.createElement("div");
-    buttonContainer.id = "menuContainer";
+function drawSidebarList(container) {
+    const sideBarContainer = document.createElement("div");
+    sideBarContainer.id = "sideBarContainer";
+    sideBarContainer.classList.add("menuContainer");
 
     const debugButton = document.createElement("button");
     debugButton.textContent = "Toggle debug";
-    debugButton.addEventListener('click', toggleDebug)
-    buttonContainer.appendChild(debugButton);
+    debugButton.addEventListener('click', toggleDebugBtn)
+    sideBarContainer.appendChild(debugButton);
 
-    container.appendChild(buttonContainer);
+    const backToMainMenuButton = document.createElement("button");
+    backToMainMenuButton.textContent = "Back to main menu";
+    backToMainMenuButton.addEventListener('click', backToMainMenuBtn)
+    sideBarContainer.appendChild(backToMainMenuButton);
+
+    container.appendChild(sideBarContainer);
 }
 
-function toggleDebug() {
+function toggleDebugBtn() {
     const wordGridItems = document.getElementsByClassName(debugWordGridItem);
     for(const wordGridItem of wordGridItems) {
         wordGridItem.classList.toggle("debug-highlight")
     }
+}
+
+function backToMainMenuBtn() {
+    loadMainMenu();
 }
