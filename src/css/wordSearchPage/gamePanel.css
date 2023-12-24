@@ -1,12 +1,22 @@
-#gameBoard {
+.winBanner {
+    display: none;
+    text-align: center; /* Center align the text */
+    width: 100%; /* Occupy the entire width available */
+    white-space: nowrap; /* Prevent text from wrapping to the next line */
+    color: var(--game-complete-txt)
+}
+
+.winBanner.gameComplete {
+    display: block;
+}
+
+#gameplayPanel {
     display: flex;
     justify-content: center;
     align-items: start;
-    margin-top: 5rem;
+    margin-top: 2rem; /* Reduce margin-top to adjust positioning */
     width: 100%;
     height: 72vh;
-
-    color: var(--ws-grid-border);
 }
 
 .grid {

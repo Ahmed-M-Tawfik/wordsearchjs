@@ -29,6 +29,9 @@
     --menu-standard-txt: #b6b6b6;
     --menu-highlight-txt: #FFFFFF;
 
+    /* Win text */
+    --game-complete-txt: #b59f3b;
+
     /* Game Config */
     --gameRows: 8;
     --gameColumns: 8;

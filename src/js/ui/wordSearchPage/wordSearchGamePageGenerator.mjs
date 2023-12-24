@@ -6,15 +6,29 @@ export const wordListItemIdPrefix = "wordListItem-";
 const debugWordGridItem = "debug-word-grid-item";
 
 export function drawWordSearchPage(container, gridSize, gridContent, wordList) {
-    drawWordList(container, wordList);
-    drawGrid(container, gridSize, gridContent);
-    drawSidebarList(container);
+    drawWinBanner(container);
+
+    const gameplayPanel = createGameplayPanel(container);
+
+    drawWordList(gameplayPanel, wordList);
+    drawGrid(gameplayPanel, gridSize, gridContent);
+    drawSidebarList(gameplayPanel);
+}
+
+function createGameplayPanel(container) {
+    const gameplayPanel = document.createElement("div");
+    gameplayPanel.id = "gameplayPanel";
+    gameplayPanel.classList.add("no-select");
+
+    container.appendChild(gameplayPanel);
+
+    return gameplayPanel;
 }
 
 function drawWordList(container, wordList) {
     const wordListContainer = document.createElement("div");
     wordListContainer.id = "wordListContainer";
-    wordListContainer.classList.add("word-list-container", "no-select")
+    wordListContainer.classList.add("word-list-container", "no-select");
 
     const htmlWordList = document.createElement("ol");
     wordListContainer.appendChild(htmlWordList);
@@ -85,4 +99,17 @@ function toggleDebugBtn() {
 
 function backToMainMenuBtn() {
     loadMainMenu();
+}
+
+function drawWinBanner(container) {
+    // draw it deactivated
+    const winBannerContainer = document.createElement("div");
+    winBannerContainer.id = "winBanner";
+    winBannerContainer.classList.add("winBanner");
+
+    const winBannerText = document.createElement("h2");
+    winBannerText.innerText = "Wordsearch complete!"
+    winBannerContainer.appendChild(winBannerText);
+
+    container.appendChild(winBannerContainer);
 }

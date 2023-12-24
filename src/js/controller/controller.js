@@ -5,7 +5,7 @@ import {drawMainMenu} from "../ui/mainMenuPage.js";
 import {clearPage} from "../ui/general.js";
 
 export function startDefaultGame() {
-    const gameBoard = document.getElementById("gameBoard");
+    const gameBoard = getGameContainer();
 
     clearPage(gameBoard);
 
@@ -22,7 +22,7 @@ export function startDefaultGame() {
 }
 
 export function loadMainMenu() {
-    const gameBoard = document.getElementById("gameBoard");
+    const gameBoard = getGameContainer();
     clearPage(gameBoard);
     drawMainMenu(gameBoard);
 }
@@ -59,4 +59,8 @@ export function isWordSelectedInGrid(coords) {
 
     console.log("Word matched " + gameState.wordList[selectedWordIndex]);
     return gameState.wordList[selectedWordIndex];
+}
+
+function getGameContainer() {
+    return document.getElementById("gameBoard");
 }
