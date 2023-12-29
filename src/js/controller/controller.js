@@ -1,24 +1,24 @@
-import {gameInit, gameState} from "../gameState.mjs";
-import {generateWordSearchContent} from "../wordSearchGenerator/Main.mjs";
-import {drawWordSearchPage} from "../ui/wordSearchPage/wordSearchGamePageGenerator.mjs";
+import {gameInit, gameState} from "../../../dist/js/gameState.js";
+import {generateWordSearchContent} from "../../../dist/js/wordSearchGenerator/Main.js";
+import {drawWordSearchPage} from "../ui/wordSearchPage/wordSearchGamePageGenerator.js";
 import {drawMainMenu} from "../ui/mainMenuPage.js";
 import {clearPage} from "../ui/general.js";
+import {GridSize} from "../../../dist/js/model/GridSize.js";
+import {GameConfig} from "../../../dist/js/model/GameConfig.js";
 
 export function startDefaultGame() {
     const gameBoard = getGameContainer();
 
     clearPage(gameBoard);
 
-    const gameConfig = {
-        rows: 8,
-        columns: 8,
-        wordCount: 6,
-        sourceDictionary: ["apple", "banana", "carrot", "durian", "eggplant", "fig", "guava", "horseradish", /*"i",*/ "jackfruit", "kale", "lemon", /*"m", "n"*/]
-    }
+    const gridSize = new GridSize(8, 8);
 
-    gameInit(gameConfig, generateWordSearchContent(gameConfig.rows, gameConfig.columns, gameConfig.wordCount, gameConfig.sourceDictionary));
+    const gameConfig = new GameConfig(6, gridSize,
+        ["apple", "banana", "carrot", "durian", "eggplant", "fig", "guava", "horseradish", /*"i",*/ "jackfruit", "kale", "lemon", /*"m", "n"*/]);
 
-    drawWordSearchPage(gameBoard, gameState.gridSize, gameState.grid, gameState.wordList);
+    gameInit(gameConfig, generateWordSearchContent(gridSize, gameConfig.targetWordCount, gameConfig.sourceDictionary));
+
+    drawWordSearchPage(gameBoard, gameState.gameConfig.gridSize, gameState.wordSearchContent.grid, gameState.wordSearchContent.wordList);
 }
 
 export function loadMainMenu() {
@@ -32,7 +32,7 @@ export function isWordSelectedInGrid(coords) {
         return false;
 
     const gridItems = coords.map((coord) => {
-        return gameState.grid[coord[0]][coord[1]];
+        return gameState.wordSearchContent.grid[coord[0]][coord[1]];
     });
 
     // purity: all selected values are for one word
@@ -52,13 +52,13 @@ export function isWordSelectedInGrid(coords) {
         gridItems[0].index
     );
 
-    if (selectedWordIndex == null || gameState.wordList[selectedWordIndex].length !== coords.length) {
+    if (selectedWordIndex == null || gameState.wordSearchContent.wordList[selectedWordIndex].length !== coords.length) {
         console.log("Failed to match word " + selectedWordIndex + " " + coords.length);
         return false;
     }
 
-    console.log("Word matched " + gameState.wordList[selectedWordIndex]);
-    return gameState.wordList[selectedWordIndex];
+    console.log("Word matched " + gameState.wordSearchContent.wordList[selectedWordIndex]);
+    return gameState.wordSearchContent.wordList[selectedWordIndex];
 }
 
 function getGameContainer() {

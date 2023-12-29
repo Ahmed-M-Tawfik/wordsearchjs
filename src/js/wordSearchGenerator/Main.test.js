@@ -1,13 +1,15 @@
 import {it, expect} from "vitest";
-import {generateWordSearchContent} from "./Main";
+import {generateWordSearchContent} from "./Main.ts";
+import {GridSize} from "../model/GridSize.ts";
 
 it('should generate word search grid with random characters', () => {
     const rows = 8;
     const columns = 8;
+    const gridSize = new GridSize(rows, columns);
     const wordCount = 6;
     const sourceDictionary = ["apple", "banana", "carrot", "durian", "eggplant", "fig", "guava", "horseradish", "jackfruit", "kale", "lemon"]
 
-    const result = generateWordSearchContent(rows, columns, wordCount, sourceDictionary);
+    const result = generateWordSearchContent(gridSize, wordCount, sourceDictionary);
 
     // WORD LIST EXPECTATIONS
     expect(result.wordList.length).toBe(wordCount);

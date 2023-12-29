@@ -1,4 +1,4 @@
-import {wordListItemIdPrefix} from "./wordSearchGamePageGenerator.mjs";
+import {wordListItemIdPrefix} from "./wordSearchGamePageGenerator.js";
 
 export function markWordAsFound(wordSelected) {
     const listItem = document.getElementById(wordListItemIdPrefix + wordSelected);

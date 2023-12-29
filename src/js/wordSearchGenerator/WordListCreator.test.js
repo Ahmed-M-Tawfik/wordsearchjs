@@ -1,5 +1,5 @@
 import {describe, beforeEach, it, vi, expect} from "vitest";
-import * as WordListCreator from "./WordListCreator.mjs";
+import * as WordListCreator from "./WordListCreator.ts";
 
 beforeEach(() => {
     vi.restoreAllMocks();

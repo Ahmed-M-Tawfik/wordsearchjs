@@ -1,7 +1,7 @@
-import {GridItem} from "./GridItem.mjs";
-import * as CharacterGenerator from "./CharacterGenerator.mjs";
+import {GridItem} from "./GridItem.js";
+import * as CharacterGenerator from "./CharacterGenerator.js";
 
-export function placeRandomCharsInEmptyGridSpaces(grid) {
+export function placeRandomCharsInEmptyGridSpaces(grid: GridItem[][] | null[][]) {
     const rows = grid.length;
     const columns = grid[0].length;
 

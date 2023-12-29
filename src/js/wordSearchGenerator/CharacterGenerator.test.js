@@ -1,5 +1,5 @@
 import {afterEach, it, vi, expect} from "vitest";
-import {generateRandomCharacter} from "./CharacterGenerator.mjs";
+import {generateRandomCharacter} from "./CharacterGenerator.ts";
 
 afterEach(() => {
     vi.spyOn(global.Math, 'random').mockRestore();

@@ -1,7 +1,7 @@
-import {stringIsBlank} from "../utils.mjs";
-import * as WordListCreator from "./WordListCreator.mjs"
+import {stringIsBlank} from "../utils.js";
+import * as WordListCreator from "./WordListCreator.js"
 
-export function pickWord(sourceDictionary) {
+export function pickWord(sourceDictionary: string[]) {
     if (sourceDictionary.length === 0) {
         throw new Error("Dictionary must contain at least one item");
     }
@@ -10,7 +10,7 @@ export function pickWord(sourceDictionary) {
     return sourceDictionary[dictionaryIndex];
 }
 
-export function validateWordForUse(pickedWord, maxWordSize, wordsToNotUse) {
+export function validateWordForUse(pickedWord: string, maxWordSize: number, wordsToNotUse: string[]) {
     let canUse = true;
 
     canUse &&= !stringIsBlank(pickedWord);
@@ -20,7 +20,7 @@ export function validateWordForUse(pickedWord, maxWordSize, wordsToNotUse) {
     return canUse;
 }
 
-export function createWordList(maxWordSize, wordCount, sourceDictionary) {
+export function createWordList(maxWordSize: number, wordCount: number, sourceDictionary: string[]) {
     if(wordCount > sourceDictionary.length)
         throw new Error("Requested word count greater than source dictionary word count")
 

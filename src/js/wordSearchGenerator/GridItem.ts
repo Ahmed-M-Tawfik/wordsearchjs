@@ -1,7 +1,7 @@
 export class GridItem {
     #content;
     #index;
-    constructor(content, index = null) {
+    constructor(content: string, index:number | null = null) {
         this.#content = content;
         this.#index = index;
     }

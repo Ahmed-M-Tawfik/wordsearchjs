@@ -1,7 +1,7 @@
 import {afterEach, it, vi, expect} from "vitest";
-import * as CharacterGenerator from "./CharacterGenerator";
-import {placeRandomCharsInEmptyGridSpaces} from "./GridItemPlacer.mjs";
-import {GridItem} from "./GridItem.mjs";
+import * as CharacterGenerator from "./CharacterGenerator.ts";
+import {placeRandomCharsInEmptyGridSpaces} from "./GridItemPlacer.ts";
+import {GridItem} from "./GridItem.ts";
 
 afterEach(() => {
     vi.restoreAllMocks();

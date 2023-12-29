@@ -1,3 +1,6 @@
+import {GridSize} from "../model/GridSize.js";
+import {GridItem} from "./GridItem.js";
+
 export function selectPlacementAlignment() {
     // randomly pick alignment (horizontal, vertical, reverse h, reverse v)
     let alignment = Math.floor(Math.random() * 2); // todo make 4
@@ -13,31 +16,31 @@ export function selectPlacementAlignment() {
     return placementLocationFunc;
 }
 
-function getVerticalPlacementLocation(wordToBeAdded, rows, columns) {
-    let maxStartingRow = rows - wordToBeAdded.length;
+function getVerticalPlacementLocation(wordToBeAdded: string, gridSize: GridSize) {
+    let maxStartingRow = gridSize.rows - wordToBeAdded.length;
     let startingRow = Math.floor(Math.random() * maxStartingRow);
-    let column = Math.floor(Math.random() * columns);
+    let column = Math.floor(Math.random() * gridSize.columns);
 
-    let getGridElementAt = function (grid, n) {
+    let getGridElementAt = function (grid: GridItem[][], n: number) {
         return grid[n + startingRow][column];
     }
-    let setGridElementAt = function (grid, n, data) {
+    let setGridElementAt = function (grid: GridItem[][], n: number, data: GridItem) {
         grid[n + startingRow][column] = data;
     }
 
     return {getGridElementAt, setGridElementAt};
 }
 
-function getHorizontalPlacementLocation(wordToBeAdded, columns, rows) {
+function getHorizontalPlacementLocation(wordToBeAdded: string, gridSize: GridSize) {
     // find the right starting point
-    let maxStartingColumn = columns - wordToBeAdded.length;
+    let maxStartingColumn = gridSize.columns - wordToBeAdded.length;
     let startingColumn = Math.floor(Math.random() * maxStartingColumn);
-    let row = Math.floor(Math.random() * rows);
+    let row = Math.floor(Math.random() * gridSize.rows);
 
-    let getGridElementAt = function (grid, n) {
+    let getGridElementAt = function (grid: GridItem[][], n: number) {
         return grid[row][n + startingColumn];
     }
-    let setGridElementAt = function (grid, n, data) {
+    let setGridElementAt = function (grid: GridItem[][], n: number, data: GridItem) {
         grid[row][n + startingColumn] = data;
     }
 
