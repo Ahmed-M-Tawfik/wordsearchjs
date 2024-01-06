@@ -1,4 +1,5 @@
-import {startDefaultGame} from "../controller/controller.js";
+import {triggerEvent} from "/dist/js/event/eventRegistry.js";
+import {GameEvents} from "/dist/js/game/gameEvents.js";
 
 let gameContainer = null;
 
@@ -23,5 +24,5 @@ export function drawMainMenu(container) {
 }
 
 function startGameDefaultSettingsBtn() {
-    startDefaultGame();
+    triggerEvent(GameEvents.urLoadGame);
 }

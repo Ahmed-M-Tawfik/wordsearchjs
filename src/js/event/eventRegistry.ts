@@ -1,7 +1,6 @@
-import {randomUUID} from 'crypto'
 import {GameEvent} from "./GameEvent.js";
 
-type CallbackType = (event: Event) => void
+type CallbackType = (event: Event | undefined) => void
 type CallbackUuidKey = string
 const eventToCallbacks: Map<GameEvent, Map<CallbackUuidKey, CallbackType>> = new Map();
 
@@ -12,7 +11,7 @@ export function registerEvent(gameEvent: GameEvent, callbackFn: CallbackType): C
         eventToCallbacks.set(gameEvent, eventCallbacks);
     }
 
-    const callbackKey: CallbackUuidKey = randomUUID();
+    const callbackKey: CallbackUuidKey = self.crypto.randomUUID();
     eventCallbacks.set(callbackKey, callbackFn);
 
     return callbackKey;
@@ -23,7 +22,7 @@ export function unregisterEvent(gameEvent: GameEvent, callbackKey: CallbackUuidK
     eventCallbacks?.delete(callbackKey);
 }
 
-export function triggerEvent(gameEvent: GameEvent, event: Event) {
+export function triggerEvent(gameEvent: GameEvent, event?: Event) {
     let eventCallbacks: Map<CallbackUuidKey, CallbackType> | undefined = eventToCallbacks.get(gameEvent);
     if(!eventCallbacks) {
         throw new Error("Received request to trigger event " + gameEvent.name + " when none registered");

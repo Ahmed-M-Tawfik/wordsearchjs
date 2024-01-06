@@ -1,10 +1,18 @@
-import {gameInit, gameState} from "../../../dist/js/gameState.js";
-import {generateWordSearchContent} from "../../../dist/js/wordSearchGenerator/Main.js";
+import {gameInit, gameState} from "/dist/js/gameState.js";
+import {generateWordSearchContent} from "/dist/js/wordSearchGenerator/Main.js";
 import {drawWordSearchPage} from "../ui/wordSearchPage/wordSearchGamePageGenerator.js";
 import {drawMainMenu} from "../ui/mainMenuPage.js";
 import {clearPage} from "../ui/general.js";
-import {GridSize} from "../../../dist/js/model/GridSize.js";
-import {GameConfig} from "../../../dist/js/model/GameConfig.js";
+import {GridSize} from "/dist/js/model/GridSize.js";
+import {GameConfig} from "/dist/js/model/GameConfig.js";
+import {registerEvent} from "/dist/js/event/eventRegistry.js";
+import {GameEvents} from "/dist/js/game/gameEvents.js";
+
+export function registerComponents() {
+    registerEvent(GameEvents.urLoadMainMenu, loadMainMenu);
+
+    registerEvent(GameEvents.urLoadGame, startDefaultGame);
+}
 
 export function startDefaultGame() {
     const gameBoard = getGameContainer();

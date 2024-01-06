@@ -1,7 +1,11 @@
-import {loadMainMenu} from "./controller/controller.js";
+import {registerAllComponents} from "./controller/componentRegistry.js";
+import {triggerEvent} from "/dist/js/event/eventRegistry.js";
+import {GameEvents} from "/dist/js/game/gameEvents.js";
 
 function init() {
-    loadMainMenu();
+    registerAllComponents();
+
+    triggerEvent(GameEvents.urLoadMainMenu);
 }
 
 init();

@@ -1,5 +1,6 @@
 import {attachEventListeners} from "./wordSearchGridInteraction.js";
-import {loadMainMenu} from "../../controller/controller.js";
+import {triggerEvent} from "/dist/js/event/eventRegistry.js";
+import {GameEvents} from "/dist/js/game/gameEvents.js";
 
 export const wordListItemIdPrefix = "wordListItem-";
 
@@ -98,7 +99,7 @@ function toggleDebugBtn() {
 }
 
 function backToMainMenuBtn() {
-    loadMainMenu();
+    triggerEvent(GameEvents.urLoadMainMenu);
 }
 
 function drawWinBanner(container) {
