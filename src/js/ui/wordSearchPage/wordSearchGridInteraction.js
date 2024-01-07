@@ -67,7 +67,7 @@ export function updateSelectionUi(boxesSelected) {
 }
 
 function clearSelection() {
-    const list = document.getElementsByClassName("selected")
+    const list = document.getElementsByClassName("selected");
     Array.from(list).forEach(function(gridItem) {
         gridItem.classList.remove("selected");
     });

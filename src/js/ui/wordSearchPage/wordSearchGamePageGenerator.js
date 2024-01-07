@@ -4,7 +4,7 @@ import {GameEvents} from "/dist/js/game/gameEvents.js";
 
 export const wordListItemIdPrefix = "wordListItem-";
 
-const debugWordGridItem = "debug-word-grid-item";
+export const debugWordGridItemCssClass = "debug-word-grid-item";
 
 export function drawWordSearchPage(container, gridSize, gridContent, wordList) {
     drawWinBanner(container);
@@ -65,7 +65,7 @@ function drawGridBox(grid, row, col, gridItem) {
     const gridBox = document.createElement("div");
     gridBox.classList.add("gridBox");
     if (gridItem.index !== null) {
-        gridBox.classList.add(debugWordGridItem)
+        gridBox.classList.add(debugWordGridItemCssClass)
     }
     gridBox.textContent = gridItem.content;
     gridBox.id = `gridBox-${row}.${col}`;
@@ -92,10 +92,7 @@ function drawSidebarList(container) {
 }
 
 function toggleDebugBtn() {
-    const wordGridItems = document.getElementsByClassName(debugWordGridItem);
-    for(const wordGridItem of wordGridItems) {
-        wordGridItem.classList.toggle("debug-highlight")
-    }
+    triggerEvent(GameEvents.urToggleDebugHighlightingOfWordsInWordsearch);
 }
 
 function backToMainMenuBtn() {

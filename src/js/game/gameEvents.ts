@@ -16,6 +16,9 @@ export const GameEvents = {
     "urLoadGame": new GameEvent("urLoadGame"),
     "gameLoaded": new GameEvent("gameLoaded"),
 
+    "urToggleDebugHighlightingOfWordsInWordsearch": new GameEvent("urToggleDebugHighlightingOfWordsInWordsearch"),
+    "debugHighlightingOfWordsInWordsearchToggled": new GameEvent("debugHighlightingOfWordsInWordsearchToggled"),
+
     // user has selected a sequence of characters in the wordsearch
     "urSelectCharacterSequence": new GameEvent("urSelectCharacterSequence"),
     // char sequence matches a word in the word list

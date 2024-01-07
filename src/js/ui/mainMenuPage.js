@@ -17,7 +17,7 @@ export function drawMainMenu(container) {
 
     const customConfigGameButton = document.createElement("button");
     customConfigGameButton.textContent = "Configure and start game";
-    //startDefaultGameButton.addEventListener()
+    //startDefaultGameButton.addEventListener('click', startGameCustomSettingsBtn);
     menuContainer.appendChild(customConfigGameButton);
 
     container.appendChild(menuContainer);
