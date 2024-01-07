@@ -25,7 +25,7 @@ export function unregisterEvent(gameEvent: GameEvent, callbackKey: CallbackUuidK
 export function triggerEvent(gameEvent: GameEvent, relevantData?: any) {
     let eventCallbacks: Map<CallbackUuidKey, CallbackType> | undefined = eventToCallbacks.get(gameEvent);
     if(!eventCallbacks) {
-        console.warn("Received request to trigger event " + gameEvent.name + " when none registered");
+        console.debug("Received request to trigger event " + gameEvent.name + " when none registered");
         return;
     }
 

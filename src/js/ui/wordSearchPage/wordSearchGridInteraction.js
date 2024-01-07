@@ -1,5 +1,9 @@
-import {isWordSelectedInGrid} from "../../controller/controller.js";
-import {markWordAsFound} from "./wordSearchWordListInteraction.js";
+import {registerEvent, triggerEvent} from "/dist/js/event/eventRegistry.js";
+import {GameEvents} from "/dist/js/game/gameEvents.js";
+
+export function registerComponents() {
+    registerEvent(GameEvents.validCharacterSequenceSelected, updateFoundStateUi);
+}
 
 let isDragging = false;
 let selectedBoxes = new Set();
@@ -34,23 +38,21 @@ function handleMouseUp(event) {
 
     console.log("Finished dragging. Selected boxes: " + Array.from(selectedBoxes).map(box => box.id).join(', '));
 
-    const wordSelected = isWordSelectedInGrid(Array.from(selectedBoxes).map((gridBox) => {
+    const coordsOfSelectedCharacters = Array.from(selectedBoxes).map((gridBox) => {
+        // each id comes as 'gridBox-X.Y'. Split and retrieve the coordinates
         const coordStr = gridBox.id.split("-")[1];
         return coordStr.split(".");
-    }));
+    });
 
-    clearSelection();
+    triggerEvent(GameEvents.urSelectCharacterSequence, coordsOfSelectedCharacters);
 
-    if(wordSelected) {
-        updateFoundState(selectedBoxes);
-        markWordAsFound(wordSelected);
-    }
+    clearSelectionUi();
 }
 
 function handleMouseLeave(event) {
     isDragging = false;
 
-    clearSelection();
+    clearSelectionUi();
 }
 
 export function attachEventListeners(gridContainer) {
@@ -66,15 +68,15 @@ export function updateSelectionUi(boxesSelected) {
     });
 }
 
-function clearSelection() {
+function clearSelectionUi() {
     const list = document.getElementsByClassName("selected");
     Array.from(list).forEach(function(gridItem) {
         gridItem.classList.remove("selected");
     });
 }
 
-export function updateFoundState(boxesSelected) {
-    boxesSelected.forEach((gridBox) => {
+export function updateFoundStateUi() {
+    selectedBoxes.forEach((gridBox) => {
         gridBox.classList.add("found");
     });
 }

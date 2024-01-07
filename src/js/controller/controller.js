@@ -5,13 +5,15 @@ import {drawMainMenu} from "../ui/mainMenuPage.js";
 import {clearPage} from "../ui/general.js";
 import {GridSize} from "/dist/js/model/GridSize.js";
 import {GameConfig} from "/dist/js/model/GameConfig.js";
-import {registerEvent} from "/dist/js/event/eventRegistry.js";
+import {registerEvent, triggerEvent} from "/dist/js/event/eventRegistry.js";
 import {GameEvents} from "/dist/js/game/gameEvents.js";
 
 export function registerComponents() {
     registerEvent(GameEvents.urLoadMainMenu, loadMainMenu);
 
     registerEvent(GameEvents.urLoadGame, startDefaultGame);
+
+    registerEvent(GameEvents.urSelectCharacterSequence, isWordSelectedInGrid);
 }
 
 export function startDefaultGame() {
@@ -36,8 +38,10 @@ export function loadMainMenu() {
 }
 
 export function isWordSelectedInGrid(coords) {
-    if (coords.length === 0)
-        return false;
+    if (coords.length === 0) {
+        // no op, neither invalid nor valid - should never happen
+        return;
+    }
 
     const gridItems = coords.map((coord) => {
         return gameState.wordSearchContent.grid[coord[0]][coord[1]];
@@ -62,11 +66,13 @@ export function isWordSelectedInGrid(coords) {
 
     if (selectedWordIndex == null || gameState.wordSearchContent.wordList[selectedWordIndex].length !== coords.length) {
         console.log("Failed to match word " + selectedWordIndex + " " + coords.length);
-        return false;
+
+        triggerEvent(GameEvents.invalidCharacterSequenceSelected, coords);
+        return;
     }
 
     console.log("Word matched " + gameState.wordSearchContent.wordList[selectedWordIndex]);
-    return gameState.wordSearchContent.wordList[selectedWordIndex];
+    triggerEvent(GameEvents.validCharacterSequenceSelected, gameState.wordSearchContent.wordList[selectedWordIndex]);
 }
 
 function getGameContainer() {
