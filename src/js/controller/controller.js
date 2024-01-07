@@ -8,15 +8,19 @@ import {GameConfig} from "/dist/js/model/GameConfig.js";
 import {registerEvent, triggerEvent} from "/dist/js/event/eventRegistry.js";
 import {GameEvents} from "/dist/js/game/gameEvents.js";
 
+// to access from web console
+window.getGameState = () => gameState;
+
 export function registerComponents() {
     registerEvent(GameEvents.urLoadMainMenu, loadMainMenu);
-
     registerEvent(GameEvents.urLoadGame, startDefaultGame);
-
-    registerEvent(GameEvents.urSelectCharacterSequence, isWordSelectedInGrid);
+    registerEvent(GameEvents.urSelectCharacterSequence, evalWordSelectedInGrid);
+    registerEvent(GameEvents.validCharacterSequenceSelected, markWordAsFound);
+    registerEvent(GameEvents.wordMarkedAsFound, evalAllWordsFound);
+    registerEvent(GameEvents.allWordsFound, markGameAsComplete);
 }
 
-export function startDefaultGame() {
+function startDefaultGame() {
     const gameBoard = getGameContainer();
 
     clearPage(gameBoard);
@@ -31,13 +35,13 @@ export function startDefaultGame() {
     drawWordSearchPage(gameBoard, gameState.gameConfig.gridSize, gameState.wordSearchContent.grid, gameState.wordSearchContent.wordList);
 }
 
-export function loadMainMenu() {
+function loadMainMenu() {
     const gameBoard = getGameContainer();
     clearPage(gameBoard);
     drawMainMenu(gameBoard);
 }
 
-export function isWordSelectedInGrid(coords) {
+function evalWordSelectedInGrid(coords) {
     if (coords.length === 0) {
         // no op, neither invalid nor valid - should never happen
         return;
@@ -71,8 +75,28 @@ export function isWordSelectedInGrid(coords) {
         return;
     }
 
-    console.log("Word matched " + gameState.wordSearchContent.wordList[selectedWordIndex]);
-    triggerEvent(GameEvents.validCharacterSequenceSelected, gameState.wordSearchContent.wordList[selectedWordIndex]);
+    const wordFoundData = {
+        "index": selectedWordIndex,
+        "name": gameState.wordSearchContent.wordList[selectedWordIndex]
+    }
+    console.log("Word matched " + wordFoundData.name);
+    triggerEvent(GameEvents.validCharacterSequenceSelected, wordFoundData);
+}
+
+function markWordAsFound(wordFoundData) {
+    gameState.wordSearchState.wordFoundIndex.push(wordFoundData.index);
+    triggerEvent(GameEvents.wordMarkedAsFound, wordFoundData);
+}
+
+function evalAllWordsFound() {
+    if(gameState.wordSearchContent.wordList.length === gameState.wordSearchState.wordFoundIndex.length) {
+        triggerEvent(GameEvents.allWordsFound);
+    }
+}
+
+function markGameAsComplete() {
+    // nothing to do, given current logic of the game
+    triggerEvent(GameEvents.gameCompleted);
 }
 
 function getGameContainer() {

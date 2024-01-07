@@ -6,7 +6,9 @@ export function registerComponents() {
     registerEvent(GameEvents.validCharacterSequenceSelected, markWordAsFound);
 }
 
-export function markWordAsFound(wordSelected) {
-    const listItem = document.getElementById(wordListItemIdPrefix + wordSelected);
-    listItem.classList.add("word-list-item-found");
+const wordFoundCssClass = "word-list-item-found";
+
+export function markWordAsFound(wordFoundData) {
+    const listItem = document.getElementById(wordListItemIdPrefix + wordFoundData.name);
+    listItem.classList.add(wordFoundCssClass);
 }
