@@ -1,4 +1,5 @@
-import {startDefaultGame} from "../controller/controller.js";
+import {triggerEvent} from "/dist/js/event/eventRegistry.js";
+import {GameEvents} from "/dist/js/game/gameEvents.js";
 
 let gameContainer = null;
 
@@ -16,12 +17,12 @@ export function drawMainMenu(container) {
 
     const customConfigGameButton = document.createElement("button");
     customConfigGameButton.textContent = "Configure and start game";
-    //startDefaultGameButton.addEventListener()
+    //startDefaultGameButton.addEventListener('click', startGameCustomSettingsBtn);
     menuContainer.appendChild(customConfigGameButton);
 
     container.appendChild(menuContainer);
 }
 
 function startGameDefaultSettingsBtn() {
-    startDefaultGame();
+    triggerEvent(GameEvents.urLoadGame);
 }
