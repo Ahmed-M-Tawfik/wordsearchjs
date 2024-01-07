@@ -4,6 +4,9 @@
   "description": "Word Search in JS",
   "main": "index.js",
   "scripts": {
+    "clean": "rm -rf dist",
+    "build": "npm run clean && tsc",
+    "start": "npm run build && http-server",
     "test": "vitest --config ./src/js/vitest.config.ts",
     "test:watch": "vitest",
     "coverage": "vitest run --coverage"
@@ -17,6 +20,7 @@
     "typescript": "^5.3.3"
   },
   "devDependencies": {
-    "vitest": "^0.9.3"
+    "vitest": "^0.9.3",
+    "http-server": "^14.1.1"
   }
 }
