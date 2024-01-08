@@ -14,7 +14,12 @@ npm install typescript
 ```shell
 npm install source-map-support --save
 ```
+#### Standard build
+```shell
+npm run build
+```
 
+#### Manual build
 Build the typescript into javascript before running:
 ```shell 
 tsc
@@ -22,6 +27,12 @@ tsc
 The dist folder under root should now contain new javascript files.
 
 ### Running
+#### Standard run
+```shell
+npm run start
+```
+
+#### Manual run
 Download http-server via npm:
 ```shell 
 npm install -g http-server
@@ -34,7 +45,7 @@ http-server
 Click on the link printed in the console to open in the default browser.
 
 ## Running unit tests
-Run via terminal or via IntelliJ Jest run configuration:
+Run via terminal or via IntelliJ ViTest run configuration:
 ```shell
 npm run test
 ```
