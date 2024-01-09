@@ -1,5 +1,5 @@
-import {GridItem} from "./GridItem.js";
-import * as CharacterGenerator from "./CharacterGenerator.js";
+import {GridItem} from "./GridItem.ts";
+import * as CharacterGenerator from "./CharacterGenerator.ts";
 
 export function placeRandomCharsInEmptyGridSpaces(grid: GridItem[][] | null[][]) {
     const rows = grid.length;

@@ -1,4 +1,4 @@
-import {afterEach, it, vi, expect} from "vitest";
+import {it, expect} from "vitest";
 import {createEmptyGrid} from "./GridCreator.ts";
 import {GridSize} from "../model/GridSize.ts";
 

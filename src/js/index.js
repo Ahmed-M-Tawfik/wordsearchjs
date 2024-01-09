@@ -1,6 +1,6 @@
 import {registerAllComponents} from "./controller/componentRegistry.js";
-import {triggerEvent} from "/dist/js/event/eventRegistry.js";
-import {GameEvents} from "/dist/js/game/gameEvents.js";
+import {triggerEvent} from "./event/eventRegistry.ts";
+import {GameEvents} from "./game/gameEvents.ts";
 
 function init() {
     registerAllComponents();

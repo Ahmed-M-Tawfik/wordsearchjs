@@ -1,4 +1,4 @@
-import {GridItem} from "../wordSearchGenerator/GridItem.js";
+import {GridItem} from "../wordSearchGenerator/GridItem.ts";
 
 export class WordSearchContent {
     grid: GridItem[][];

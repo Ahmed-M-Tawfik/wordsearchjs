@@ -1,5 +1,5 @@
 import {WordSearchContent} from "./model/WordSearchContent.js";
-import {GameConfig} from "./model/GameConfig.js";
+import {GameConfig} from "./model/GameConfig.ts";
 import {GameState} from "./model/GameState.js";
 import {WordSearchState} from "./model/WordSearchState.js";
 

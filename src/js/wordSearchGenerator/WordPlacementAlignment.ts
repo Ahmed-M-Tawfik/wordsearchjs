@@ -1,9 +1,9 @@
-import {GridSize} from "../model/GridSize.js";
+import {GridSize} from "../model/GridSize.ts";
 import {GridItem} from "./GridItem.js";
 
 export function selectPlacementAlignment() {
     // randomly pick alignment (horizontal, vertical, reverse h, reverse v)
-    let alignment = Math.floor(Math.random() * 2); // todo make 4
+    const alignment = Math.floor(Math.random() * 2); // todo make 4
 
     // get relevant placement logic
     let placementLocationFunc = getHorizontalPlacementLocation;
@@ -17,14 +17,14 @@ export function selectPlacementAlignment() {
 }
 
 function getVerticalPlacementLocation(wordToBeAdded: string, gridSize: GridSize) {
-    let maxStartingRow = gridSize.rows - wordToBeAdded.length;
-    let startingRow = Math.floor(Math.random() * maxStartingRow);
-    let column = Math.floor(Math.random() * gridSize.columns);
+    const maxStartingRow = gridSize.rows - wordToBeAdded.length;
+    const startingRow = Math.floor(Math.random() * maxStartingRow);
+    const column = Math.floor(Math.random() * gridSize.columns);
 
-    let getGridElementAt = function (grid: GridItem[][], n: number) {
+    const getGridElementAt = function (grid: GridItem[][], n: number) {
         return grid[n + startingRow][column];
     }
-    let setGridElementAt = function (grid: GridItem[][], n: number, data: GridItem) {
+    const setGridElementAt = function (grid: GridItem[][], n: number, data: GridItem) {
         grid[n + startingRow][column] = data;
     }
 
@@ -33,14 +33,14 @@ function getVerticalPlacementLocation(wordToBeAdded: string, gridSize: GridSize)
 
 function getHorizontalPlacementLocation(wordToBeAdded: string, gridSize: GridSize) {
     // find the right starting point
-    let maxStartingColumn = gridSize.columns - wordToBeAdded.length;
-    let startingColumn = Math.floor(Math.random() * maxStartingColumn);
-    let row = Math.floor(Math.random() * gridSize.rows);
+    const maxStartingColumn = gridSize.columns - wordToBeAdded.length;
+    const startingColumn = Math.floor(Math.random() * maxStartingColumn);
+    const row = Math.floor(Math.random() * gridSize.rows);
 
-    let getGridElementAt = function (grid: GridItem[][], n: number) {
+    const getGridElementAt = function (grid: GridItem[][], n: number): GridItem {
         return grid[row][n + startingColumn];
     }
-    let setGridElementAt = function (grid: GridItem[][], n: number, data: GridItem) {
+    const setGridElementAt = function (grid: GridItem[][], n: number, data: GridItem): void {
         grid[row][n + startingColumn] = data;
     }
 
