@@ -100,5 +100,5 @@ function markGameAsComplete() {
 }
 
 function getGameContainer() {
-    return document.getElementById("gameBoard");
+    return document.getElementById("root");
 }

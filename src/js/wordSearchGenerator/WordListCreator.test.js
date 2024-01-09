@@ -109,7 +109,7 @@ describe('createWordList', () => {
     it('should create word list with one approved word, given one word to list and a valid word', () => {
         // inputs made (partially or totally) redundant by mocks
         const maxWordCharacterLength = 4;
-        const sourceDictionary = [,];
+        const sourceDictionary = ["",];
 
         // effective inputs
         const maxWordsToAddToList = 1;
@@ -127,7 +127,7 @@ describe('createWordList', () => {
     it('should create word list with approved words, given words to list and valid words', () => {
         // inputs made (partially or totally) redundant by mocks
         const maxWordCharacterLength = 4;
-        const sourceDictionary = [, , , ,];
+        const sourceDictionary = ["", "", "", "",];
 
         // effective inputs
         const maxWordsToAddToList = 4;
@@ -145,7 +145,7 @@ describe('createWordList', () => {
 
     it('should throw error when given more words to find than words available in the source dictionary', () => {
         const maxWordCharacterLength = 4;
-        const sourceDictionary = [,];
+        const sourceDictionary = ["",];
         const maxWordsToAddToList = 4;
 
         const resultFn = () => WordListCreator.createWordList(maxWordCharacterLength, maxWordsToAddToList, sourceDictionary);
@@ -155,7 +155,7 @@ describe('createWordList', () => {
 
     it('should throw error when circuit breaker triggers due to inability to find a valid word', () => {
         const maxWordCharacterLength = 4;
-        const sourceDictionary = [,];
+        const sourceDictionary = ["",];
         const maxWordsToAddToList = 1;
 
         const resultFn = () => WordListCreator.createWordList(maxWordCharacterLength, maxWordsToAddToList, sourceDictionary);

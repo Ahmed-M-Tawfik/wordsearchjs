@@ -28,7 +28,7 @@ export function placeWordsInGrid(gridSize: GridSize, wordCount: number, wordList
 export function attemptWordsPlacement(gridSize: GridSize, wordCount: number, wordList: string[], grid: GridItem[][]) {
     let wordSuccessfullyAdded = true;
     for (let i = 0; i < wordCount && wordSuccessfullyAdded; i++) {
-        let wordToBeAdded = wordList[i];
+        const wordToBeAdded = wordList[i];
         wordSuccessfullyAdded = wordSuccessfullyAdded && WordPlacer.attemptWordPlacement(wordToBeAdded, i, gridSize, grid);
     }
     return wordSuccessfullyAdded;
@@ -49,7 +49,7 @@ export function attemptWordPlacement(word: string, index: number, gridSize: Grid
     do {
         retries++;
 
-        let placementLocationFunc = selectPlacementAlignment();
+        const placementLocationFunc = selectPlacementAlignment();
         const alignmentSpecificFunctions = placementLocationFunc(word, gridSize);
 
         if (WordPlacer.invalidWordPlacementInGrid(word, grid, alignmentSpecificFunctions.getGridElementAt)) {
@@ -64,13 +64,15 @@ export function attemptWordPlacement(word: string, index: number, gridSize: Grid
     return wordSuccessfullyAdded;
 }
 
-export function placeWordInGrid(wordToBeAdded: string, grid: GridItem[][], wordIndex: number, setGridElementAt: any) {
+export function placeWordInGrid(wordToBeAdded: string, grid: GridItem[][], wordIndex: number,
+                                setGridElementAt: (grid: GridItem[][], n: number, data: GridItem) => void) {
     for (let n = 0; n < wordToBeAdded.length; n++) {
         setGridElementAt(grid, n, new GridItem(wordToBeAdded[n], wordIndex));
     }
 }
 
-export function invalidWordPlacementInGrid(wordToBeAdded: string, grid: GridItem[][], getGridElementAt: any) {
+export function invalidWordPlacementInGrid(wordToBeAdded: string, grid: GridItem[][],
+                                           getGridElementAt: (grid: GridItem[][], n: number) => GridItem) {
     let badPlacementDetected = false;
     for (let n = 0; n < wordToBeAdded.length; n++) {
         if (getGridElementAt(grid, n)) {

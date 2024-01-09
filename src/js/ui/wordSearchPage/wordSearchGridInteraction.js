@@ -49,7 +49,7 @@ function handleMouseUp(event) {
     clearSelectionUi();
 }
 
-function handleMouseLeave(event) {
+function handleMouseLeave() {
     isDragging = false;
 
     clearSelectionUi();

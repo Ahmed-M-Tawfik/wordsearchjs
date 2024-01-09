@@ -5,7 +5,7 @@ import {WordSearchState} from "./WordSearchState.js";
 export class GameState {
     gameConfig: GameConfig;
     wordSearchContent: WordSearchContent;
-    wordSearchState: any;
+    wordSearchState;
 
     constructor(gameConfig: GameConfig, wordSearchContent: WordSearchContent, wordSearchState: WordSearchState) {
         this.gameConfig = gameConfig;

@@ -1,6 +1,6 @@
 import {GameEvent} from "./GameEvent.ts";
 
-type CallbackType = (event: Event | undefined) => void
+type CallbackType = (arg: unknown) => void
 type CallbackUuidKey = string
 const eventToCallbacks: Map<GameEvent, Map<CallbackUuidKey, CallbackType>> = new Map();
 
@@ -22,8 +22,8 @@ export function unregisterEvent(gameEvent: GameEvent, callbackKey: CallbackUuidK
     eventCallbacks?.delete(callbackKey);
 }
 
-export function triggerEvent(gameEvent: GameEvent, relevantData?: any) {
-    let eventCallbacks: Map<CallbackUuidKey, CallbackType> | undefined = eventToCallbacks.get(gameEvent);
+export function triggerEvent(gameEvent: GameEvent, relevantData?: unknown) {
+    const eventCallbacks: Map<CallbackUuidKey, CallbackType> | undefined = eventToCallbacks.get(gameEvent);
     if(!eventCallbacks) {
         console.debug("Received request to trigger event " + gameEvent.name + " when none registered");
         return;
