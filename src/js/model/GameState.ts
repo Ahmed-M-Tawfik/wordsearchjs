@@ -1,4 +1,4 @@
-import {GameConfig} from "./GameConfig.js";
+import {GameConfig} from "./GameConfig.ts";
 import {WordSearchContent} from "./WordSearchContent.js";
 import {WordSearchState} from "./WordSearchState.js";
 

@@ -1,4 +1,4 @@
-import {GameEvent} from "./GameEvent.js";
+import {GameEvent} from "./GameEvent.ts";
 
 type CallbackType = (event: Event | undefined) => void
 type CallbackUuidKey = string

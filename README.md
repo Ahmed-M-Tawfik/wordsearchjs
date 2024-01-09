@@ -7,42 +7,30 @@ By Ahmed Tawfik
 Due to the use of JS modules, CORS browser policies prevent running directly from the filesystem. Running this HTML requires running from a web server.
 
 ### Building
-Ensure you have typescript and source-map-support:
+Install application dependencies via NPM, then build a production build:
 ```shell
-npm install typescript
+npm install
 ```
-```shell
-npm install source-map-support --save
-```
-#### Standard build
 ```shell
 npm run build
 ```
+Now contents of `dist` folder are ready to be deployed to a static web server. 
 
-#### Manual build
-Build the typescript into javascript before running:
-```shell 
-tsc
-```
-The dist folder under root should now contain new javascript files.
-
-### Running
-#### Standard run
+You may use preview mode to verify correct build in `dist` folder:
 ```shell
-npm run start
+npm run preview
 ```
 
-#### Manual run
-Download http-server via npm:
-```shell 
-npm install -g http-server
-```
-
-Ensure you're on the root folder of this project and run the http server:
+### Running in dev mode
 ```shell
-http-server
+npm run dev
 ```
-Click on the link printed in the console to open in the default browser.
+Click on the link printed in the console to open in the default browser. Note that this will also enter the console and browser into watch mode, updating the browser on every change under `./src`.
+
+### Linting
+```shell
+npm run lint
+```
 
 ## Running unit tests
 Run via terminal or via IntelliJ ViTest run configuration:

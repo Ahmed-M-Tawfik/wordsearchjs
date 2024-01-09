@@ -1,8 +1,8 @@
-import {createWordList} from "./WordListCreator.js";
-import {placeRandomCharsInEmptyGridSpaces,} from "./GridItemPlacer.js";
-import {placeWordsInGrid} from "./WordPlacer.js";
-import {GridSize} from "../model/GridSize.js";
-import {WordSearchContent} from "../model/WordSearchContent.js";
+import {createWordList} from "./WordListCreator.ts";
+import {placeRandomCharsInEmptyGridSpaces,} from "./GridItemPlacer.ts";
+import {placeWordsInGrid} from "./WordPlacer.ts";
+import {GridSize} from "../model/GridSize.ts";
+import {WordSearchContent} from "../model/WordSearchContent.ts";
 
 export function generateWordSearchContent(gridSize: GridSize, wordCount: number, sourceDictionary: string[]): WordSearchContent {
     return wordSearchFillAlgorithm(gridSize, wordCount, sourceDictionary);

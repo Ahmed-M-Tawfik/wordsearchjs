@@ -1,5 +1,5 @@
-import {registerEvent, triggerEvent} from "/dist/js/event/eventRegistry.js";
-import {GameEvents} from "/dist/js/game/gameEvents.js";
+import {registerEvent, triggerEvent} from "/src/js/event/eventRegistry.ts";
+import {GameEvents} from "/src/js/game/gameEvents.ts";
 
 export function registerComponents() {
     registerEvent(GameEvents.validCharacterSequenceSelected, updateFoundStateUi);

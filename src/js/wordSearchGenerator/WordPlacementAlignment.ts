@@ -1,4 +1,4 @@
-import {GridSize} from "../model/GridSize.js";
+import {GridSize} from "../model/GridSize.ts";
 import {GridItem} from "./GridItem.js";
 
 export function selectPlacementAlignment() {

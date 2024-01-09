@@ -1,4 +1,4 @@
-import {GridSize} from "./GridSize.js";
+import {GridSize} from "./GridSize.ts";
 
 export class GameConfig {
     targetWordCount: number;

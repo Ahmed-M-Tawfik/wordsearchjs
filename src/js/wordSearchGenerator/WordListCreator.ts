@@ -1,5 +1,5 @@
-import {stringIsBlank} from "../utils.js";
-import * as WordListCreator from "./WordListCreator.js"
+import {stringIsBlank} from "../utils.ts";
+import * as WordListCreator from "./WordListCreator.ts"
 
 export function pickWord(sourceDictionary: string[]) {
     if (sourceDictionary.length === 0) {

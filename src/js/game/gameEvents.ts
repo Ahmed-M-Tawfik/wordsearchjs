@@ -1,4 +1,4 @@
-import {GameEvent} from "../event/GameEvent.js";
+import {GameEvent} from "../event/GameEvent.ts";
 
 /**
  * Retrieve an event from here and use with event registry

@@ -1,12 +1,12 @@
-import {gameInit, gameState} from "/dist/js/gameState.js";
-import {generateWordSearchContent} from "/dist/js/wordSearchGenerator/Main.js";
+import {gameInit, gameState} from "/src/js/gameState.ts";
+import {generateWordSearchContent} from "/src/js/wordSearchGenerator/Main.ts";
 import {drawWordSearchPage} from "../ui/wordSearchPage/wordSearchGamePageGenerator.js";
 import {drawMainMenu} from "../ui/mainMenuPage.js";
 import {clearPage} from "../ui/general.js";
-import {GridSize} from "/dist/js/model/GridSize.js";
-import {GameConfig} from "/dist/js/model/GameConfig.js";
-import {registerEvent, triggerEvent} from "/dist/js/event/eventRegistry.js";
-import {GameEvents} from "/dist/js/game/gameEvents.js";
+import {GridSize} from "/src/js/model/GridSize.ts";
+import {GameConfig} from "/src/js/model/GameConfig.ts";
+import {registerEvent, triggerEvent} from "/src/js/event/eventRegistry.ts";
+import {GameEvents} from "/src/js/game/gameEvents.ts";
 
 // to access from web console
 window.getGameState = () => gameState;

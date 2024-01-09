@@ -1,26 +1,38 @@
 {
   "name": "wordsearchjs",
-  "version": "1.0.0",
   "description": "Word Search in JS",
+  "author": "Ahmed Tawfik",
+  "version": "1.0.0",
+  "type": "module",
   "main": "index.js",
+  "keywords": [],
+  "private": true,
   "scripts": {
-    "clean": "rm -rf dist",
-    "build": "npm run clean && tsc",
-    "start": "npm run build && http-server",
-    "test": "vitest --config ./src/js/vitest.config.ts",
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "lint": "eslint . --ext ts,tsx,js --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview",
+    "test": "vitest --config ./vitest.config.ts",
     "test:watch": "vitest",
     "coverage": "vitest run --coverage"
   },
-  "type": "module",
-  "keywords": [],
-  "author": "Ahmed Tawfik",
-  "license": "ISC",
   "dependencies": {
-    "source-map-support": "^0.5.21",
-    "typescript": "^5.3.3"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "vitest": "^0.9.3",
-    "http-server": "^14.1.1"
+    "http-server": "^14.1.1",
+    "@types/react": "^18.2.43",
+    "@types/react-dom": "^18.2.17",
+    "@typescript-eslint/eslint-plugin": "^6.14.0",
+    "@typescript-eslint/parser": "^6.14.0",
+    "@vitejs/plugin-react": "^4.2.1",
+    "eslint": "^8.55.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.5",
+    "source-map-support": "^0.5.21",
+    "typescript": "^5.3.3",
+    "vite": "^5.0.8",
+    "vitest": "^0.9.3"
   }
 }

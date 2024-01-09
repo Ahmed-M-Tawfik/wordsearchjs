@@ -2,7 +2,7 @@ import {createEmptyGrid} from "./GridCreator.js";
 import {selectPlacementAlignment} from "./WordPlacementAlignment.js";
 import {GridItem} from "./GridItem.js";
 import * as WordPlacer from "./WordPlacer.js";
-import {GridSize} from "../model/GridSize.js";
+import {GridSize} from "../model/GridSize.ts";
 
 const WORD_PLACEMENT_MAX_RETRIES = 20;
 
